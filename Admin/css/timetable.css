@@ -1,0 +1,130 @@
+/* Add these styles to your CSS file */
+.exam-time {
+    padding: 10px !important;
+}
+
+.time-container {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+    align-items: center;
+}
+
+.time-badge, .duration-badge {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    padding: 8px 12px;
+    border-radius: 20px;
+    font-size: 0.9rem;
+    transition: all 0.3s ease;
+    white-space: nowrap;
+}
+
+.time-badge {
+    background: linear-gradient(135deg, #2193b0, #6dd5ed);
+    color: white;
+    box-shadow: 0 2px 10px rgba(33, 147, 176, 0.2);
+}
+
+.duration-badge {
+    background: linear-gradient(135deg, #f2994a, #f2c94c);
+    color: white;
+    box-shadow: 0 2px 10px rgba(242, 153, 74, 0.2);
+}
+
+.time-badge i, .duration-badge i {
+    font-size: 1rem;
+}
+
+.time-badge:hover, .duration-badge:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
+}
+
+.time-text {
+    font-weight: 500;
+    letter-spacing: 0.5px;
+}
+
+/* Animation for the time section */
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+        transform: translateY(10px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+.time-container {
+    animation: fadeIn 0.5s ease-out;
+}
+
+/* Responsive design */
+@media screen and (max-width: 768px) {
+    .time-container {
+        flex-direction: column;
+    }
+    
+    .time-badge, .duration-badge {
+        width: 100%;
+        justify-content: center;
+    }
+}
+
+/* Add hover effect for the entire row */
+.timetable tr:hover .time-badge {
+    background: linear-gradient(135deg, #1c7aaa, #5bc3db);
+    transform: scale(1.02);
+}
+
+.timetable tr:hover .duration-badge {
+    background: linear-gradient(135deg, #e68a42, #e6bc45);
+    transform: scale(1.02);
+}
+
+/* Optional: Add a subtle transition effect when filtering */
+.semester-section {
+    transition: all 0.3s ease-in-out;
+}
+
+/* Optional: Add a glass morphism effect */
+.time-badge, .duration-badge {
+    backdrop-filter: blur(10px);
+    -webkit-backdrop-filter: blur(10px);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+/* Optional: Add a pulsing animation for the clock icon */
+@keyframes pulse {
+    0% {
+        transform: scale(1);
+    }
+    50% {
+        transform: scale(1.1);
+    }
+    100% {
+        transform: scale(1);
+    }
+}
+
+.time-badge i {
+    animation: pulse 2s infinite;
+}
+
+/* Optional: Add a rotating animation for the hourglass icon */
+@keyframes rotate {
+    0% {
+        transform: rotate(0deg);
+    }
+    100% {
+        transform: rotate(360deg);
+    }
+}
+
+.duration-badge i {
+    animation: rotate 3s linear infinite;
+} 

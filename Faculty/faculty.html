@@ -1,0 +1,870 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Faculty Dashboard - Exam Central</title>
+    <link rel="stylesheet" href="faculty.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600&display=swap" rel="stylesheet">
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <script defer src="faculty.js"></script>
+    <script src="../shared/subjects.js"></script>
+</head>
+<body>
+    <div class="dashboard-container">
+        <!-- Sidebar -->
+        <aside class="sidebar">
+            <div class="sidebar-header">
+                <i class="fas fa-chalkboard-teacher"></i>
+                <h2>Faculty Portal</h2>
+            </div>
+            <nav class="sidebar-nav">
+                <button class="nav-item active" data-section="home">
+                    <i class="fas fa-home"></i>
+                    <span>Home</span>
+                </button>
+                <button class="nav-item" data-section="profile">
+                    <i class="fas fa-user"></i>
+                    <span>Profile</span>
+                </button>
+                <button class="nav-item" data-section="students">
+                    <i class="fas fa-users"></i>
+                    <span>My Students</span>
+                </button>
+                <button class="nav-item" data-section="marks">
+                    <i class="fas fa-clipboard-check"></i>
+                    <span>Marks</span>
+                </button>
+                <button class="nav-item" data-section="results">
+                    <i class="fas fa-chart-bar"></i>
+                    <span>Results Analysis</span>
+                </button>
+                <button class="nav-item" data-section="supervision">
+                    <i class="fas fa-user-shield"></i>
+                    <span>Supervision</span>
+                </button>
+            </nav>
+        </aside>
+
+        <!-- Main Content -->
+        <main class="main-content">
+            <header class="content-header">
+                <div class="header-left">
+                    <h1 id="section-title">Dashboard Overview</h1>
+                </div>
+                <div class="header-right">
+                    <div class="faculty-info">
+                        <span class="faculty-name">Dr. John Doe</span>
+                        <img src="https://ui-avatars.com/api/?name=John+Doe&background=4361ee&color=fff" alt="Faculty" class="faculty-avatar" id="facultyAvatar">
+                        <div class="faculty-dropdown" id="facultyDropdown">
+                            <div class="dropdown-header">
+                                <strong>Faculty Account</strong>
+                            </div>
+                            <div class="dropdown-divider"></div>
+                            <button class="dropdown-item" onclick="window.location.href='#profile'">
+                                <i class="fas fa-user-circle"></i> My Profile
+                            </button>
+                            <button class="dropdown-item" onclick="window.location.href='#settings'">
+                                <i class="fas fa-cog"></i> Settings
+                            </button>
+                            <button id="logoutBtn" class="dropdown-item logout-btn">
+                                <i class="fas fa-sign-out-alt"></i> Logout
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            </header>
+
+            <!-- Home Section -->
+            <section id="home" class="content-section active">
+                <div class="welcome-header">
+                    <h1>Welcome to Faculty Portal</h1>
+
+                    <p class="subtitle">Manage your academic responsibilities efficiently</p>
+                </div>
+
+                <div class="quick-actions">
+                    <div class="action-card">
+                        <div class="action-icon">
+                            <i class="fas fa-users"></i>
+                        </div>
+                        <div class="action-content">
+                            <h3>Student Management</h3>
+                            <p>View and manage student records</p>
+                            <button class="action-btn" onclick="navigateToSection('students')">
+                                <span>Access Now</span>
+                                <i class="fas fa-arrow-right"></i>
+                            </button>
+                        </div>
+                    </div>
+
+                    <div class="action-card">
+                        <div class="action-icon">
+                            <i class="fas fa-clipboard-check"></i>
+                        </div>
+                        <div class="action-content">
+                            <h3>Marks Management</h3>
+                            <p>Update and review student marks</p>
+                            <button class="action-btn" onclick="navigateToSection('marks')">
+                                <span>Access Now</span>
+                                <i class="fas fa-arrow-right"></i>
+                            </button>
+                        </div>
+                    </div>
+
+                    <div class="action-card">
+                        <div class="action-icon">
+                            <i class="fas fa-chart-bar"></i>
+                        </div>
+                        <div class="action-content">
+                            <h3>Results Analysis</h3>
+                            <p>View performance analytics</p>
+                            <button class="action-btn" onclick="navigateToSection('results')">
+                                <span>Access Now</span>
+                                <i class="fas fa-arrow-right"></i>
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Profile Section -->
+            <section id="profile" class="content-section">
+                <div class="profile-container">
+                    <!-- Profile Header -->
+                    <div class="profile-header">
+                        <div class="profile-cover">
+                            <div class="cover-overlay"></div>
+                        </div>
+                        <div class="profile-info">
+                            <div class="profile-avatar-wrapper">
+                                <div class="profile-avatar">
+                                    <img src="https://ui-avatars.com/api/?name=Faculty&background=4361ee&color=fff&size=120" alt="Faculty">
+                                </div>
+                                
+                            </div>
+                            <div class="profile-details">
+                                <h2 class="profile-name">Loading...</h2>
+                                <p class="profile-designation">Loading...</p>
+                                <div class="profile-stats">
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Profile Content -->
+                    <div class="profile-content">
+                        <div class="profile-grid">
+                            <!-- Personal Information -->
+                            <div class="profile-card">
+                                <div class="card-header">
+                                    <h3><i class="fas fa-user"></i> Personal Information</h3>
+                                </div>
+                                <div class="card-content">
+                                    <div class="info-group">
+                                        <label><i class="fas fa-user-circle"></i> Full Name</label>
+                                        <p id="fullName">Loading...</p>
+                                    </div>
+                                    <div class="info-group">
+                                        <label><i class="fas fa-envelope"></i> Email</label>
+                                        <p id="email">Loading...</p>
+                                    </div>
+                                    <div class="info-group">
+                                        <label><i class="fas fa-calendar-alt"></i> Age</label>
+                                        <p id="age">Loading...</p>
+                                    </div>
+                                    <div class="info-group">
+                                        <label><i class="fas fa-venus-mars"></i> Gender</label>
+                                        <p id="gender">Loading...</p>
+                                    </div>
+                                    <div class="info-group">
+                                        <label><i class="fas fa-phone"></i> Contact</label>
+                                        <p id="contact">Loading...</p>
+                                    </div>
+                                    <div class="info-group">
+                                        <label><i class="fas fa-map-marker-alt"></i> Address</label>
+                                        <p id="address">Loading...</p>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <!-- Professional Information -->
+                            <div class="profile-card">
+                                <div class="card-header">
+                                    <h3><i class="fas fa-briefcase"></i> Professional Information</h3>
+                                </div>
+                                <div class="card-content">
+                                    <div class="info-group">
+                                        <label><i class="fas fa-building"></i> Department</label>
+                                        <p id="department">Loading...</p>
+                                    </div>
+                                    <div class="info-group">
+                                        <label><i class="fas fa-user-tie"></i> Designation</label>
+                                        <p id="designation">Loading...</p>
+                                    </div>
+                                    <div class="info-group">
+                                        <label><i class="fas fa-graduation-cap"></i> Specialization</label>
+                                        <p id="specialization">Loading...</p>
+                                    </div>
+                                    <div class="info-group">
+                                        <label><i class="fas fa-history"></i> Experience</label>
+                                        <p id="experience">Loading...</p>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Students Section -->
+         <!-- Students Section -->
+<section id="students" class="content-section">
+    <div class="student-section-container">
+        <div class="student-header">
+            <h2>My Students</h2>
+        </div>
+        
+        <!-- Filter Section -->
+        <div class="filter-section">
+            <div class="filter-controls">
+                <div class="filter-dropdown">
+                    <select id="studentSemester" class="form-select">
+                        <option value="">All Semesters</option>
+                        <option value="1">Semester 1</option>
+                        <option value="2">Semester 2</option>
+                        <option value="3">Semester 3</option>
+                        <option value="4">Semester 4</option>
+                        <option value="5">Semester 5</option>
+                        <option value="6">Semester 6</option>
+                        <option value="7">Semester 7</option>
+                        <option value="8">Semester 8</option>
+                    </select>
+                </div>
+                <div class="search-container">
+                    <i class="fas fa-search"></i>
+                    <input type="text" id="studentSearch" class="search-input" placeholder="Search by name or seat number">
+                </div>
+                <button class="action-btn" id="searchStudentsBtn">
+                    <i class="fas fa-search"></i> Search
+                </button>
+            </div>
+        </div>
+        
+        <!-- Student Stats -->
+       <!-- Student Stats -->
+<div class="student-stats">
+    <div class="stat-card">
+        <div class="stat-icon">
+            <i class="fas fa-users"></i>
+        </div>
+        <div class="stat-info">
+            <h3>Total Students</h3>
+            <p id="studentsTotalCount">120</p>
+        </div>
+    </div>
+    <div class="stat-card">
+        <div class="stat-icon success">
+            <i class="fas fa-user-check"></i>
+        </div>
+        <div class="stat-info">
+            <h3>Enrolled Students</h3>
+            <p id="activeStudents">115</p>
+        </div>
+    </div>
+    <div class="stat-card">
+        <div class="stat-icon warning">
+            <i class="fas fa-user-clock"></i>
+        </div>
+        <div class="stat-info">
+            <h3>Current Semester</h3>
+            <p id="defaulterStudents">4</p>
+        </div>
+    </div>
+    <div class="stat-card">
+        <div class="stat-icon danger">
+            <i class="fas fa-user-graduate"></i>
+        </div>
+        <div class="stat-info">
+            <h3>Graduating Soon</h3>
+            <p id="failedStudents">8</p>
+        </div>
+    </div>
+</div>
+        
+        <!-- Student List -->
+        <div class="student-list-container">
+            <div class="student-table-wrapper">
+                <table class="student-table">
+                    <thead>
+                        <tr>
+                            <th>Seat No.</th>
+                            <th>Student Name</th>
+                            <th>Branch</th>
+                            <th>Semester</th>
+                        </tr>
+                    </thead>
+                    <tbody id="studentTableBody">
+                        <!-- Will be populated dynamically -->
+                    </tbody>
+                </table>
+            </div>
+            
+            <!-- Pagination -->
+            <div class="pagination">
+                <button class="pagination-btn" id="prevPageBtn">
+                    <i class="fas fa-chevron-left"></i>
+                </button>
+                <div id="pageIndicator">Page 1 of 5</div>
+                <button class="pagination-btn" id="nextPageBtn">
+                    <i class="fas fa-chevron-right"></i>
+                </button>
+            </div>
+        </div>
+    </div>
+</section>
+
+            <!-- Marks Section -->
+            <section id="marks" class="content-section">
+                <h2 class="section-title">Marks Management</h2>
+                
+                <!-- Add tabs for subsections -->
+                <div class="section-tabs">
+                    <button class="tab-btn active" data-tab="individual-entry">
+                        <i class="fas fa-user"></i> Individual Entry
+                    </button>
+                    <button class="tab-btn" data-tab="bulk-upload">
+                        <i class="fas fa-file-upload"></i> Bulk Upload
+                    </button>
+                    <button class="tab-btn" data-tab="grade-cards">
+                        <i class="fas fa-file-alt"></i> Grade Cards
+                    </button>
+                </div>
+                
+                <!-- Individual Entry Tab Content -->
+                <div id="individual-entry" class="tab-content active">
+                    <div class="marks-entry-container">
+                        <div class="seat-number-entry">
+                            <input type="text" id="seatNumberInput" placeholder="Enter Seat Number" class="form-input">
+                            <button class="action-btn" onclick="fetchStudentDetails()">
+                                <i class="fas fa-search"></i> Find Student
+                            </button>
+                        </div>
+
+                        <div class="student-details" id="studentDetailsCard" style="display: none;">
+                            <h3>Student Details</h3>
+                            <div class="details-grid">
+                                <div class="detail-item">
+                                    <span>Name:</span>
+                                    <p id="studentName">-</p>
+                                </div>
+                                <div class="detail-item">
+                                    <span>Roll No:</span>
+                                    <p id="studentRoll">-</p>
+                                </div>
+                                <div class="detail-item">
+                                    <span>Branch:</span>
+                                    <p id="studentBranch">-</p>
+                                </div>
+                                <div class="detail-item">
+                                    <span>Semester:</span>
+                                    <p id="studentSemester">-</p>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="subjects-container" id="subjectsContainer" style="display: none;">
+                            <h3>Enter Marks for All Subjects</h3>
+                            <div class="subjects-grid" id="subjectsGrid">
+                                <!-- Subject cards will be dynamically inserted here -->
+                            </div>
+                            
+                            <div class="marks-actions">
+                                <button class="action-btn" onclick="saveAllSubjectMarks()">
+                                    <i class="fas fa-save"></i> Save All Marks
+                                </button>
+                                <button class="action-btn secondary" onclick="clearAllForms()">
+                                    <i class="fas fa-undo"></i> Clear All
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Bulk Upload Tab Content -->
+                <div id="bulk-upload" class="tab-content">
+                    <div class="bulk-upload-container">
+                        <div class="filter-section">
+                            <div class="filter-controls">
+                                <select id="bulkSemesterSelect" class="form-select">
+                                    <option value="">Select Semester</option>
+                                    <option value="1">Semester 1</option>
+                                    <option value="2">Semester 2</option>
+                                    <option value="3">Semester 3</option>
+                                    <option value="4">Semester 4</option>
+                                    <option value="5">Semester 5</option>
+                                    <option value="6">Semester 6</option>
+                                    <option value="7">Semester 7</option>
+                                    <option value="8">Semester 8</option>
+                                </select>
+                                <select id="bulkSubjectSelect" class="form-select">
+                                    <option value="">Select Subject</option>
+                                    <!-- Will be populated dynamically -->
+                                </select>
+                            </div>
+                        </div>
+                        
+                        <div class="upload-section">
+                            <div class="upload-card">
+                                <div class="upload-icon">
+                                    <i class="fas fa-file-excel"></i>
+                                </div>
+                                <h3>Upload Marks Excel File</h3>
+                                <p>Upload an Excel file containing student marks for the selected subject and semester.</p>
+                                
+                                <div class="file-upload-container">
+                                    <input type="file" id="marksExcelFile" accept=".xlsx, .xls" class="file-input" />
+                                    <label for="marksExcelFile" class="file-upload-label">
+                                        <i class="fas fa-cloud-upload-alt"></i>
+                                        <span>Choose Excel File</span>
+                                    </label>
+                                    <p id="selectedFileName" class="selected-file-name">No file selected</p>
+                                </div>
+                                
+                                <button id="uploadMarksBtn" class="action-btn primary-btn" style="display: inline-flex; margin-top: 1rem;">
+                                    <i class="fas fa-upload"></i> Upload Marks
+                                </button>
+                            </div>
+                            
+                            <div class="template-card">
+                                <h3>Excel Template Format</h3>
+                                <p>Your Excel file should have the following columns:</p>
+                                <div class="template-preview">
+                                    <table class="template-table">
+                                        <thead>
+                                            <tr>
+                                                <th>Seat Number</th>
+                                                <th>Student Name</th>
+                                                <th>Internal (25)</th>
+                                                <th>Semester (75)</th>
+                                                <th>Practical (25)</th>
+                                                <th>Term Work (25)</th>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                            <tr>
+                                                <td>12001</td>
+                                                <td>John Doe</td>
+                                                <td>20</td>
+                                                <td>65</td>
+                                                <td>22</td>
+                                                <td>23</td>
+                                            </tr>
+                                            <tr>
+                                                <td>12002</td>
+                                                <td>Jane Smith</td>
+                                                <td>18</td>
+                                                <td>60</td>
+                                                <td>20</td>
+                                                <td>21</td>
+                                            </tr>
+                                        </tbody>
+                                    </table>
+                                </div>
+                                <button id="downloadTemplateBtn" class="action-btn secondary">
+                                    <i class="fas fa-download"></i> Download Template
+                                </button>
+                            </div>
+                        </div>
+                        
+                        <div id="uploadResults" class="upload-results" style="display: none;">
+                            <div class="results-header">
+                                <h3>Upload Results</h3>
+                                <div class="results-summary">
+                                    <div class="result-stat">
+                                        <span>Total Records:</span>
+                                        <p id="totalRecords">0</p>
+                                    </div>
+                                    <div class="result-stat">
+                                        <span>Successful:</span>
+                                        <p id="successfulRecords">0</p>
+                                    </div>
+                                    <div class="result-stat">
+                                        <span>Failed:</span>
+                                        <p id="failedRecords">0</p>
+                                    </div>
+                                </div>
+                            </div>
+                            
+                            <div class="results-table-container">
+                                <table class="results-table">
+                                    <thead>
+                                        <tr>
+                                            <th>Seat Number</th>
+                                            <th>Student Name</th>
+                                            <th>Status</th>
+                                            <th>Message</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody id="uploadResultsBody">
+                                        <!-- Will be populated dynamically -->
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Grade Cards Tab Content (moved from results section) -->
+                <div id="grade-cards" class="tab-content">
+                    <div class="results-section">
+                        <h3>Generate Grade Card</h3>
+                        <div class="results-search">
+                            <input type="text" id="resultSeatNumber" class="form-input" placeholder="Enter Student Seat Number">
+                            <button class="action-btn" onclick="generateGradeCard()">
+                                <i class="fas fa-file-alt"></i> Generate Grade Card
+                            </button>
+                            <button class="action-btn secondary" onclick="showGenerateAllGradeCards()">
+                                <i class="fas fa-file-alt"></i> Generate All Grade Cards
+                            </button>
+                        </div>
+                        
+                        <div id="gradeCard" class="grade-card" style="display: none;">
+                            <div class="grade-card-header">
+                                <div class="university-logo">
+                                    <i class="fas fa-university"></i>
+                                </div>
+                                <div class="university-details">
+                                    <h2>Mumbai University</h2>
+                                    <p>Grade Card</p>
+                                </div>
+                            </div>
+                            
+                            <div class="student-details">
+                                <div class="detail-row">
+                                    <div class="detail-item">
+                                        <span class="detail-label">Name:</span>
+                                        <span class="detail-value" id="gradeCardName">-</span>
+                                    </div>
+                                    <div class="detail-item">
+                                        <span class="detail-label">Seat Number:</span>
+                                        <span class="detail-value" id="gradeCardSeat">-</span>
+                                    </div>
+                                </div>
+                                <div class="detail-row">
+                                    <div class="detail-item">
+                                        <span class="detail-label">Branch:</span>
+                                        <span class="detail-value" id="gradeCardBranch">-</span>
+                                    </div>
+                                    <div class="detail-item">
+                                        <span class="detail-label">Semester:</span>
+                                        <span class="detail-value" id="gradeCardSemester">-</span>
+                                    </div>
+                                </div>
+                            </div>
+                            
+                            <div class="marks-table-container">
+                                <table class="grade-table">
+                                    <thead>
+                                        <tr>
+                                            <th>Subject</th>
+                                            <th>Semester (75)</th>
+                                            <th>Internal (25)</th>
+                                            <th>Practical (25)</th>
+                                            <th>Term Work (25)</th>
+                                            <th>Total</th>
+                                            <th>Grade</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody id="gradeTableBody">
+                                        <!-- Will be populated dynamically -->
+                                    </tbody>
+                                </table>
+                            </div>
+                            
+                            <div class="result-summary">
+                                <div class="summary-item">
+                                    <span class="summary-label">SGPA:</span>
+                                    <span class="summary-value" id="sgpa">-</span>
+                                </div>
+                                <div class="summary-item">
+                                    <span class="summary-label">Result:</span>
+                                    <span class="summary-value" id="finalResult">-</span>
+                                </div>
+                            </div>
+                            
+                            <div class="grade-card-actions">
+                                
+                                <button class="action-btn secondary" id="viewHistoryBtn" style="display: none;" onclick="viewGradeCardHistory()">
+                                    <i class="fas fa-history"></i> View History
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Results Section -->
+            <section id="results" class="content-section">
+                <div class="results-container">
+                    <div class="results-header">
+                        <div class="results-filters">
+                            <select id="resultsSemester" class="form-select">
+                                <option value="">All Semesters</option>
+                                <option value="1">Semester 1</option>
+                                <option value="2">Semester 2</option>
+                                <option value="3">Semester 3</option>
+                                <option value="4">Semester 4</option>
+                                <option value="5">Semester 5</option>
+                                <option value="6">Semester 6</option>
+                                <option value="7">Semester 7</option>
+                                <option value="8">Semester 8</option>
+                            </select>
+                            <select id="resultsSubject" class="form-select">
+                                <option value="">All Subjects</option>
+                                <!-- This will be populated dynamically -->
+                            </select>
+                            <button class="action-btn" onclick="loadResultsAnalysis()">
+                                <i class="fas fa-sync"></i> Update Analysis
+                            </button>
+                        </div>
+                    </div>
+
+                    <div class="results-stats">
+                        <div class="stat-card">
+                            <div class="stat-icon">
+                                <i class="fas fa-users"></i>
+                            </div>
+                            <div class="stat-info">
+                                <h3>Total Students</h3>
+                                <p id="resultsTotalStudents">0</p>
+                            </div>
+                        </div>
+                        <div class="stat-card">
+                            <div class="stat-icon">
+                                <i class="fas fa-check-circle"></i>
+                            </div>
+                            <div class="stat-info">
+                                <h3>Pass Percentage</h3>
+                                <p id="passPercentage">0%</p>
+                            </div>
+                        </div>
+                        <div class="stat-card">
+                            <div class="stat-icon">
+                                <i class="fas fa-star"></i>
+                            </div>
+                            <div class="stat-info">
+                                <h3>Average SGPA</h3>
+                                <p id="averageSGPA">0.00</p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="results-charts">
+                        <div class="chart-container">
+                            <h3>Grade Distribution</h3>
+                            <canvas id="gradeDistributionChart"></canvas>
+                        </div>
+                        <div class="chart-container">
+                            <h3>Pass/Fail Distribution</h3>
+                            <canvas id="passFailChart"></canvas>
+                        </div>
+                    </div>
+
+                    <!-- Subject Performance Section -->
+                    <div id="subjectPerformanceSection" class="subject-performance-section">
+                        <h3>Subject-wise Performance</h3>
+                        <div class="chart-container full-width">
+                            <canvas id="subjectPerformanceChart"></canvas>
+                        </div>
+                    </div>
+
+                    <div class="results-table">
+                        <h3>Detailed Results</h3>
+                        <table>
+                            <thead>
+                                <tr>
+                                    <th>Roll Number</th>
+                                    <th>Name</th>
+                                    <th>SGPA</th>
+                                    <th>Result</th>
+                                    <th>Actions</th>
+                                </tr>
+                            </thead>
+                            <tbody id="resultsTableBody">
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Supervision Section -->
+            <section id="supervision" class="content-section">
+                <div class="supervision-container">
+                    <div class="supervision-card">
+                        <div class="supervision-card-header">
+                            <div class="supervision-icon">
+                                <i class="fas fa-clipboard-list"></i>
+                            </div>
+                            <div class="supervision-title">
+                                <h3>Your Supervision Allocations</h3>
+                                <p>Classrooms assigned to you for exam supervision</p>
+                            </div>
+                        </div>
+                        
+                        <div id="supervisionAllocationsContainer" class="supervision-allocations">
+                            <div class="loading-state">
+                                <i class="fas fa-circle-notch fa-spin"></i>
+                                <p>Loading your supervision allocations...</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Add this after the supervision-container div in the supervision section -->
+                <div id="studentListModal" class="modal">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <h3 id="modalRoomTitle">Students in Room</h3>
+                            <button class="close-btn" id="closeStudentListBtn">
+                                <i class="fas fa-times"></i>
+                            </button>
+                        </div>
+                        <div class="modal-body">
+                            <div class="student-list-header">
+                                <div class="exam-details">
+                                    <div class="exam-paper">
+                                        <span id="modalPaperCode">Paper Code</span>
+                                        <h4 id="modalPaperName">Paper Name</h4>
+                                    </div>
+                                    <div class="exam-time">
+                                        <i class="fas fa-calendar-day"></i>
+                                        <span id="modalExamDate">Exam Date</span>
+                                        <i class="fas fa-clock ml-2"></i>
+                                        <span id="modalExamTime">Exam Time</span>
+                                    </div>
+                                </div>
+                                <div class="student-count">
+                                    <i class="fas fa-users"></i>
+                                    <span id="modalStudentCount">0 Students</span>
+                                </div>
+                            </div>
+                            
+                            <div class="attendance-actions">
+                                <button id="markAllPresentBtn" class="action-btn">
+                                    <i class="fas fa-check-circle"></i> Mark All Present
+                                </button>
+                                <button id="downloadAttendanceBtn" class="action-btn secondary">
+                                    <i class="fas fa-file-pdf"></i> Download PDF Report
+                                </button>
+                                <button id="saveAttendanceBtn" class="action-btn primary">
+                                    <i class="fas fa-save"></i> Save Attendance
+                                </button>
+                            </div>
+                            
+                            <div id="studentListContainer" class="student-list-table-container">
+                                <div class="loading-state">
+                                    <i class="fas fa-circle-notch fa-spin"></i>
+                                    <p>Loading students...</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+        </main>
+    </div>
+
+    <script>
+        // Check authentication on page load
+        document.addEventListener('DOMContentLoaded', () => {
+            const token = localStorage.getItem('token') || sessionStorage.getItem('token');
+            const userRole = localStorage.getItem('userRole') || sessionStorage.getItem('userRole');
+
+            if (!token || userRole !== 'faculty') {
+                window.location.href = '/Login/Login.html';
+                return;
+            }
+
+            // Decode the JWT token to get faculty info
+            try {
+                const tokenData = JSON.parse(atob(token.split('.')[1]));
+                document.querySelector('.faculty-name').textContent = `Welcome, ${tokenData.name}`;
+            } catch (error) {
+                console.error('Error decoding token:', error);
+            }
+        });
+
+        function logout() {
+            localStorage.removeItem('token');
+            localStorage.removeItem('userRole');
+            sessionStorage.removeItem('token');
+            sessionStorage.removeItem('userRole');
+            window.location.href = '/Login/Login.html';
+        }
+    </script>
+
+    <!-- Add this modal for bulk grade card generation -->
+    <div id="bulkGradeCardModal" class="modal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h3>Generate Grade Cards</h3>
+                <button class="close-btn" onclick="closeBulkGradeCardModal()">
+                    <i class="fas fa-times"></i>
+                </button>
+            </div>
+            <div class="modal-body">
+                <div class="bulk-generation-controls">
+                    <div class="filter-controls">
+                        <select id="bulkGradeCardSemester" class="form-select">
+                            <option value="">Select Semester</option>
+                            <option value="1">Semester 1</option>
+                            <option value="2">Semester 2</option>
+                            <option value="3">Semester 3</option>
+                            <option value="4">Semester 4</option>
+                            <option value="5">Semester 5</option>
+                            <option value="6">Semester 6</option>
+                            <option value="7">Semester 7</option>
+                            <option value="8">Semester 8</option>
+                        </select>
+                        <button class="action-btn" onclick="startBulkGeneration()">
+                            <i class="fas fa-play"></i> Start Generation
+                        </button>
+                    </div>
+                </div>
+                <div class="generation-progress" style="display: none;">
+                    <div class="progress-header">
+                        <h4>Generation Progress</h4>
+                        <span id="progressCount">0/0 Complete</span>
+                    </div>
+                    <div class="progress-bar-container">
+                        <div id="generationProgressBar" class="progress-bar"></div>
+                    </div>
+                </div>
+                <div class="students-list">
+                    <table class="generation-table">
+                        <thead>
+                            <tr>
+                                <th>Seat No.</th>
+                                <th>Student Name</th>
+                                <th>Status</th>
+                            </tr>
+                        </thead>
+                        <tbody id="bulkGenerationTableBody">
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button class="action-btn" id="downloadSummaryBtn" style="display: none;" onclick="downloadGenerationSummary()">
+                    <i class="fas fa-download"></i> Download Summary
+                </button>
+                <button class="action-btn secondary" onclick="closeBulkGradeCardModal()">
+                    <i class="fas fa-times"></i> Close
+                </button>
+            </div>
+        </div>
+    </div>
+</body>
+</html>

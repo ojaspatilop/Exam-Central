@@ -1,0 +1,600 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Student Dashboard</title>
+    <link rel="stylesheet" href="studentsection.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600&display=swap" rel="stylesheet">
+    <script defer src="studentsection.js"></script>
+</head>
+<body>
+    <div class="form-progress">
+        <div class="progress-bar" id="formProgress"></div>
+    </div>
+    <div class="dashboard-container">
+        <!-- Sidebar -->
+        <aside class="sidebar">
+            <div class="sidebar-header">
+                <i class="fas fa-university"></i>
+                <h2>Student Portal</h2>
+            </div>
+            <nav class="sidebar-nav">
+                <button class="nav-item" data-section="profile">
+                    <i class="fas fa-user"></i>
+                    <span>Profile</span>
+                </button>
+                <button class="nav-item" data-section="exam-form">
+                    <i class="fas fa-file-alt"></i>
+                    <span>Exam Form</span>
+                </button>
+                <button class="nav-item" data-section="hall-ticket">
+                    <i class="fas fa-ticket-alt"></i>
+                    <span>Hall Ticket</span>
+                </button>
+               
+                <button class="nav-item" data-section="seating">
+                    <i class="fas fa-chair"></i>
+                    <span>Seating</span>
+                </button>
+                <button class="nav-item" data-section="results">
+                    <i class="fas fa-graduation-cap"></i>
+                    <span>Results</span>
+                </button>
+                
+            </nav>
+        </aside>
+
+        <!-- Main Content -->
+        <main class="main-content">
+            <header class="content-header">
+                <div class="header-left">
+                    <h1 id="section-title">Profile</h1>
+                </div>
+                <div class="header-right">
+                    <div class="user-info">
+                        <span class="user-name">John Doe</span>
+                        <img src="https://ui-avatars.com/api/?name=John+Doe" alt="Profile" class="user-avatar" id="userAvatar">
+                        <div class="user-dropdown" id="userDropdown">
+                            <div class="dropdown-header">
+                                <strong>Student Account</strong>
+                            </div>
+                            <div class="dropdown-divider"></div>
+                            <button id="logoutBtn" class="dropdown-item logout-btn">
+                                <i class="fas fa-sign-out-alt"></i> Logout
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            </header>
+
+            <!-- Profile Section -->
+            <section id="profile" class="content-section active">
+                <div class="profile-grid">
+                    <!-- Personal Information Card -->
+                    <div class="profile-card">
+                        <div class="card-header">
+                            <i class="fas fa-user-circle"></i>
+                            <h3>Personal Information</h3>
+                        </div>
+                        <div class="card-content">
+                            <div class="info-group">
+                                <label>Full Name</label>
+                                <p>John Doe</p>
+                            </div>
+                            <div class="info-group">
+                                <label>Roll Number</label>
+                                <p>CS2023001</p>
+                            </div>
+                            <div class="info-group">
+                                <label>Branch</label>
+                                <p>Computer Science</p>
+                            </div>
+                            <div class="info-group">
+                                <label>Semester</label>
+                                <p>6th Semester</p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Contact Information Card -->
+                    <div class="profile-card">
+                        <div class="card-header">
+                            <i class="fas fa-address-card"></i>
+                            <h3>Contact Information</h3>
+                        </div>
+                        <div class="card-content">
+                            <div class="info-group">
+                                <label>Email</label>
+                                <p>john.doe@example.com</p>
+                            </div>
+                            <div class="info-group">
+                                <label>Phone</label>
+                                <p>+1 234 567 8900</p>
+                            </div>
+                            <div class="info-group">
+                                <label>Address</label>
+                                <p>123 University Street, Academic City</p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Academic Status Card -->
+                    <div class="profile-card">
+                        <div class="card-header">
+                            <i class="fas fa-graduation-cap"></i>
+                            <h3>Academic Status</h3>
+                        </div>
+                        <div class="card-content">
+                            <div class="info-group">
+                                <label>Current CGPA</label>
+                                <p>8.75</p>
+                            </div>
+                            <div class="info-group">
+                                <label>Attendance</label>
+                                <p>85%</p>
+                            </div>
+                            <div class="info-group">
+                                <label>Academic Year</label>
+                                <p>2023-2024</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Exam Form Section -->
+            <section id="exam-form" class="content-section">
+                <div class="form-container">
+                    <form id="examRegistrationForm" class="exam-form">
+                        <!-- Personal Information -->
+                        <div class="form-section">
+                            <h3><i class="fas fa-user-circle"></i> Personal Information</h3>
+                            <div class="form-grid">
+                                <div class="form-group">
+                                    <label>First Name*</label>
+                                    <div class="input-wrapper">
+                                        <i class="fas fa-user input-icon"></i>
+                                        <input type="text" id="firstName" name="firstName" required>
+                                    </div>
+                                </div>
+                                <div class="form-group">
+                                    <label>Middle Name*</label>
+                                    <div class="input-wrapper">
+                                        <i class="fas fa-user input-icon"></i>
+                                        <input type="text" id="middleName" name="middleName" required>
+                                    </div>
+                                </div>
+                                <div class="form-group">
+                                    <label>Last Name*</label>
+                                    <div class="input-wrapper">
+                                        <i class="fas fa-user input-icon"></i>
+                                        <input type="text" id="lastName" name="lastName" required>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="form-grid">
+                                <div class="form-group">
+                                    <label>Date of Birth*</label>
+                                    <div class="input-wrapper">
+                                        <i class="fas fa-calendar-alt input-icon"></i>
+                                        <input type="date" 
+                                               id="dateOfBirth" 
+                                               name="dateOfBirth" 
+                                               required 
+                                               max="2006-12-31"
+                                               min="1990-01-01">
+                                    </div>
+                                </div>
+                                <div class="form-group">
+                                    <label>Gender*</label>
+                                    <div class="input-wrapper">
+                                        <i class="fas fa-venus-mars input-icon"></i>
+                                        <select id="gender" required>
+                                            <option value="">Select Gender</option>
+                                            <option value="male">Male</option>
+                                            <option value="female">Female</option>
+                                            <option value="other">Other</option>
+                                        </select>
+                                    </div>
+                                </div>
+                                <div class="form-group">
+                                    <label>Category*</label>
+                                    <div class="input-wrapper">
+                                        <i class="fas fa-users input-icon"></i>
+                                        <select id="category" required>
+                                            <option value="">Select Category</option>
+                                            <option value="general">General</option>
+                                            <option value="obc">OBC</option>
+                                            <option value="sc">SC</option>
+                                            <option value="st">ST</option>
+                                            <option value="ews">EWS</option>
+                                        </select>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="form-grid">
+                                <div class="form-group">
+                                    <label>Email Address*</label>
+                                    <div class="input-wrapper">
+                                        <i class="fas fa-envelope input-icon"></i>
+                                        <input type="email" id="email" required>
+                                    </div>
+                                </div>
+                                <div class="form-group">
+                                    <label>Mobile Number*</label>
+                                    <div class="input-wrapper">
+                                        <i class="fas fa-phone input-icon"></i>
+                                        <input type="tel" id="mobile" pattern="[0-9]{10}" placeholder="10-digit mobile number" required>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="form-grid">
+                                <div class="form-group">
+                                    <label>Father's Full Name*</label>
+                                    <div class="input-wrapper">
+                                        <i class="fas fa-user-tie input-icon"></i>
+                                        <input type="text" id="fatherName" required>
+                                    </div>
+                                </div>
+                                <div class="form-group">
+                                    <label>Mother's Full Name*</label>
+                                    <div class="input-wrapper">
+                                        <i class="fas fa-user-tie input-icon"></i>
+                                        <input type="text" id="motherName" required>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="form-group full-width">
+                                <label>Permanent Address*</label>
+                                <div class="input-wrapper">
+                                    <i class="fas fa-home input-icon"></i>
+                                    <textarea id="address" rows="3" required></textarea>
+                                </div>
+                            </div>
+
+                            <div class="form-grid">
+                                <div class="form-group">
+                                    <label>City*</label>
+                                    <div class="input-wrapper">
+                                        <i class="fas fa-city input-icon"></i>
+                                        <input type="text" id="city" required>
+                                    </div>
+                                </div>
+                                <div class="form-group">
+                                    <label>State*</label>
+                                    <div class="input-wrapper">
+                                        <i class="fas fa-map-marker-alt input-icon"></i>
+                                        <select id="state" required>
+                                            <option value="">Select State</option>
+                                            <option value="maharashtra">Maharashtra</option>
+                                            <option value="gujarat">Gujarat</option>
+                                            <option value="karnataka">Karnataka</option>
+                                            <option value="delhi">Delhi</option>
+                                        </select>
+                                    </div>
+                                </div>
+                                <div class="form-group">
+                                    <label>PIN Code*</label>
+                                    <div class="input-wrapper">
+                                        <i class="fas fa-map-pin input-icon"></i>
+                                        <input type="text" id="pincode" pattern="[0-9]{6}" placeholder="6-digit PIN code" required>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Academic Information -->
+                        <div class="form-section">
+                            <h3><i class="fas fa-graduation-cap"></i> Academic Details</h3>
+                            <div class="form-grid">
+                                <div class="form-group">
+                                    <label for="branch">Branch*</label>
+                                    <select id="branch" required>
+                                        <option value="">Select Branch</option>
+                                        <option value="CS">Computer Science</option>
+                                        <option value="IT">Information Technology</option>
+                                        <option value="AIML">AIML</option>
+                                        <option value="DS">DS</option>
+                                        <option value="MECHANICAL">Mechanical Engineering</option>
+                                    </select>
+                                </div>
+                                <div class="form-group">
+                                    <label for="semester">Semester*</label>
+                                    <select id="semester" required>
+                                        <option value="">Select Semester</option>
+                                        <option value="1">Semester 1</option>
+                                        <option value="2">Semester 2</option>
+                                        <option value="3">Semester 3</option>
+                                        <option value="4">Semester 4</option>
+                                        <option value="5">Semester 5</option>
+                                        <option value="6">Semester 6</option>
+                                        <option value="7">Semester 7</option>
+                                        <option value="8">Semester 8</option>
+                                    </select>
+                                </div>
+                                <div class="form-group">
+                                    <label for="rollNo">Roll Number*</label>
+                                    <input type="text" id="rollNo" required>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Examination Details -->
+                        <div class="form-section">
+                            <h3><i class="fas fa-file-alt"></i> Examination Details</h3>
+                            <div class="form-grid">
+                                <div class="form-group">
+                                    <label for="examPeriod">Examination Period*</label>
+                                    <select id="examPeriod" required>
+                                        <option value="">Select Period</option>
+                                        <option value="NOV-DEC-2024">NOV-DEC 2024</option>
+                                        <option value="MAY-JUN-2025">MAY-JUN 2025</option>
+                                    </select>
+                                </div>
+                                <div class="form-group">
+                                    <label for="examType">Exam Type*</label>
+                                    <select id="examType" required>
+                                        <option value="">Select Type</option>
+                                        <option value="regular">Regular</option>
+                                        <option value="kt">KT (Re-examination)</option>
+                                    </select>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Subject Selection -->
+                        <div class="form-section">
+                            <h3><i class="fas fa-book"></i> Subject Selection</h3>
+                            <div class="subjects-container" id="subjectsContainer">
+                                <!-- Subjects will be dynamically loaded based on branch and semester -->
+                                <p class="select-message">Please select branch and semester to view subjects</p>
+                            </div>
+                        </div>
+
+                        <!-- Fee Details -->
+                        <div class="form-section">
+                            <h3><i class="fas fa-receipt"></i> Fee Details</h3>
+                            <div class="form-grid">
+                                <div class="form-group">
+                                    <label for="feeReceipt">Upload Fee Receipt* (PDF/JPG)</label>
+                                    <div class="file-upload">
+                                        <label for="feeReceipt" class="file-label">
+                                            <i class="fas fa-cloud-upload-alt"></i>
+                                            <span>Choose File</span>
+                                        </label>
+                                        <input type="file" id="feeReceipt" accept=".pdf,.jpg,.jpeg" required hidden>
+                                    </div>
+                                </div>
+                                <div class="form-group">
+                                    <label for="signature">Upload Signature* (JPG)</label>
+                                    <div class="file-upload">
+                                        <label for="signature" class="file-label">
+                                            <i class="fas fa-signature"></i>
+                                            <span>Choose File</span>
+                                        </label>
+                                        <input type="file" id="signature" accept=".jpg,.jpeg" required hidden>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Declaration -->
+                        <div class="form-section">
+                            <h3><i class="fas fa-check-circle"></i> Declaration</h3>
+                            <div class="declaration">
+                                <label class="checkbox-container">
+                                    <input type="checkbox" required>
+                                    <span class="checkmark"></span>
+                                    I hereby declare that all the information provided is true and correct to the best of my knowledge.
+                                </label>
+                            </div>
+                        </div>
+
+                        <!-- Submit Button -->
+                        <div class="form-actions">
+                            <button type="submit" class="submit-btn">
+                                <i class="fas fa-paper-plane"></i>
+                                Submit Form
+                            </button>
+                            <button type="button" class="save-draft-btn" id="saveDraftBtn">
+                                <i class="fas fa-save"></i>
+                                Save as Draft
+                            </button>
+                            <button type="button" class="clear-form-btn" id="clearFormBtn">
+                                <i class="fas fa-eraser"></i>
+                                Clear Form
+                            </button>
+                        </div>
+                    </form>
+                </div>
+            </section>
+
+            <!-- Hall Ticket Section -->
+            <section id="hall-ticket" class="content-section">
+                <!-- This will be populated dynamically by the renderHallTicket function -->
+            </section>
+
+            <!-- Seating Section -->
+            <section id="seating" class="content-section">
+                <div class="seating-container">
+                    <!-- <div class="seating-header">
+                        <h2><i class="fas fa-chair"></i> Exam Seating Arrangements</h2>
+                        <p class="seating-description">View your assigned seating for upcoming examinations</p>
+                    </div> -->
+                    
+            
+                    
+                    <div id="seatingContent" class="seating-content">
+                        <!-- This will be populated dynamically -->
+                    </div>
+                </div>
+            </section>
+
+            <!-- Other sections will be added later -->
+            <section id="results" class="content-section">
+                <div class="section-header">
+                    <h2><i class="fas fa-graduation-cap"></i> Academic Performance</h2>
+                    <p>Your journey through semesters reflected in grades</p>
+                </div>
+                
+             
+                
+                <div class="results-container" id="resultsContainer">
+                    <!-- Results will be loaded here -->
+                    <div class="loading-container">
+                        <div class="loader-animation">
+                            <div class="loader-circle"></div>
+                            <div class="loader-circle"></div>
+                            <div class="loader-circle"></div>
+                        </div>
+                        <p>Retrieving your academic records...</p>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Add this after the results section -->
+            <section id="timetable" class="content-section">
+                <div class="section-header">
+                    <h2><i class="fas fa-calendar-alt"></i> Examination Timetable</h2>
+                    <p>Winter 2024 Examination Schedule</p>
+                </div>
+                <div class="timetable-content" id="timetableContent">
+                    <div class="timetable-grid" id="timetableGrid">
+                        <!-- Timetable will be dynamically populated here -->
+                        <div class="loading-message">
+                            <i class="fas fa-spinner fa-spin"></i>
+                            <p>Loading timetable...</p>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+        </main>
+    </div>
+
+    <script>
+    document.addEventListener('DOMContentLoaded', async () => {
+        try {
+            // Get roll number from storage
+            const rollNumber = localStorage.getItem('rollNumber') || sessionStorage.getItem('rollNumber');
+            
+            if (!rollNumber) {
+                window.location.href = '/Login/Login.html';
+                return;
+            }
+
+            // Fetch student profile data
+            const response = await fetch(`http://localhost:5001/api/student/profile/${rollNumber}`);
+            const data = await response.json();
+
+            if (!data.success) {
+                throw new Error(data.message || 'Failed to fetch profile data');
+            }
+
+            const student = data.student;
+
+            // Update profile information
+            document.querySelector('.user-name').textContent = `${student.firstName} ${student.lastName}`;
+            document.querySelector('.user-avatar').src = `https://ui-avatars.com/api/?name=${student.firstName}+${student.lastName}`;
+
+            // Update Personal Information Card
+            const personalInfo = document.querySelector('#profile .profile-grid');
+            personalInfo.innerHTML = `
+                <div class="profile-card">
+                    <div class="card-header">
+                        <i class="fas fa-user-circle"></i>
+                        <h3>Personal Information</h3>
+                    </div>
+                    <div class="card-content">
+                        <div class="info-group">
+                            <label>Full Name</label>
+                            <p>${student.firstName} ${student.middleName ? student.middleName + ' ' : ''}${student.lastName}</p>
+                        </div>
+                        <div class="info-group">
+                            <label>Roll Number</label>
+                            <p>${student.rollNumber}</p>
+                        </div>
+                        <div class="info-group">
+                            <label>Branch</label>
+                            <p>${student.branch}</p>
+                        </div>
+                        <div class="info-group">
+                            <label>Semester</label>
+                            <p>${student.semester}th Semester</p>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="profile-card">
+                    <div class="card-header">
+                        <i class="fas fa-address-card"></i>
+                        <h3>Contact Information</h3>
+                    </div>
+                    <div class="card-content">
+                        <div class="info-group">
+                            <label>Email</label>
+                            <p>${student.email}</p>
+                        </div>
+                        <div class="info-group">
+                            <label>Phone</label>
+                            <p>${student.phone}</p>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="profile-card">
+                    <div class="card-header">
+                        <i class="fas fa-graduation-cap"></i>
+                        <h3>Academic Status</h3>
+                    </div>
+                    <div class="card-content">
+                        <div class="info-group">
+                            <label>Academic Year</label>
+                            <p>${student.academicYear}</p>
+                        </div>
+                        <div class="info-group">
+                            <label>Branch</label>
+                            <p>${student.branch}</p>
+                        </div>
+                        <div class="info-group">
+                            <label>Current Semester</label>
+                            <p>${student.semester}</p>
+                        </div>
+                    </div>
+                </div>
+            `;
+
+        } catch (error) {
+            console.error('Error loading profile:', error);
+            alert('Failed to load profile data. Please try logging in again.');
+            window.location.href = '/Login/Login.html';
+        }
+
+        // Initialize navigation
+        const navItems = document.querySelectorAll('.nav-item');
+        const contentSections = document.querySelectorAll('.content-section');
+        const sectionTitle = document.getElementById('section-title');
+
+        navItems.forEach(item => {
+            item.addEventListener('click', () => {
+                const sectionId = item.getAttribute('data-section');
+                
+                // Update active states
+                navItems.forEach(nav => nav.classList.remove('active'));
+                contentSections.forEach(section => section.classList.remove('active'));
+                
+                item.classList.add('active');
+                document.getElementById(sectionId).classList.add('active');
+                sectionTitle.textContent = item.querySelector('span').textContent;
+            });
+        });
+    });
+    </script>
+</body>
+</html>

@@ -1,0 +1,140 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Exam Seating Portal</title>
+    <link rel="stylesheet" href="seatcss.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600&display=swap" rel="stylesheet">
+    <script defer src="seatscript.js"></script>
+</head>
+<body>
+    <div class="main-container">
+        <!-- Navigation Options Card -->
+        <div class="nav-options-card">
+            <div class="options-grid">
+                <button class="option-button active" onclick="navigateTo('/Seating Arrangment/seat.html')">
+                    <i class="fas fa-chair"></i>
+                    <span>Seat Arrangement</span>
+                </button>
+
+                <button class="option-button" onclick="navigateTo('../supervisor.html')">
+                    <i class="fas fa-user-tie"></i>
+                    <span>Supervisor Assignment</span>
+                </button>
+
+                <button class="option-button" onclick="navigateTo('../marks.html')">
+                    <i class="fas fa-calculator"></i>
+                    <span>Marks Calculator</span>
+                </button>
+
+                <button class="option-button" onclick="navigateTo('../result.html')">
+                    <i class="fas fa-graduation-cap"></i>
+                    <span>Result Management</span>
+                </button>
+            </div>
+        </div>
+
+        <!-- Left Section: Form and Info -->
+        <section class="left-section">
+            <!-- Form Card -->
+            <div class="form-card">
+                <h2 class="compact-heading"><i class="fas fa-chair"></i> Seat Arrangement</h2>
+                <form id="seatForm">
+                    <div class="input-group">
+                        <label><i class="fas fa-user"></i> Name:</label>
+                        <input type="text" id="name" placeholder="Enter your name" required>
+                    </div>
+                    <div class="input-group">
+                        <label><i class="fas fa-code-branch"></i> Branch:</label>
+                        <select id="branch" required>
+                            <option value="Computer Science">Computer Science</option>
+                            <option value="Information Technology">Information Technology</option>
+                            <option value="Mechanical">Mechanical</option>
+                            <option value="Electronics">Electronics</option>
+                            <option value="Civil">Civil</option>
+                        </select>
+                    </div>
+                    <div class="input-group">
+                        <label><i class="fas fa-book"></i> Paper:</label>
+                        <select id="paper" required>
+                            <option value="Paper 1">Paper 1</option>
+                            <option value="Paper 2">Paper 2</option>
+                            <option value="Paper 3">Paper 3</option>
+                            <option value="Paper 4">Paper 4</option>
+                        </select>
+                    </div>
+                    <div class="input-group">
+                        <label><i class="fas fa-calendar"></i> Exam Date:</label>
+                        <input type="date" id="examDate" required>
+                    </div>
+                    <button type="submit"><i class="fas fa-check-circle"></i> Get Seat</button>
+                </form>
+            </div>
+
+            <!-- Info Card -->
+            <div class="info-card">
+                <h2 class="compact-heading"><i class="fas fa-info-circle"></i> Seat Details</h2>
+                <div class="seat-info" id="seatInfo">
+                    <p><i class="fas fa-user"></i> <strong>Name:</strong> <span id="displayName"></span></p>
+                    <p><i class="fas fa-code-branch"></i> <strong>Branch:</strong> <span id="displayBranch"></span></p>
+                    <p><i class="fas fa-book"></i> <strong>Paper:</strong> <span id="displayPaper"></span></p>
+                    <p><i class="fas fa-calendar"></i> <strong>Exam Date:</strong> <span id="displayExamDate"></span></p>
+                    <p><i class="fas fa-id-card"></i> <strong>Roll Number:</strong> <span id="displayRoll"></span></p>
+                    <p><i class="fas fa-building"></i> <strong>Floor:</strong> <span id="displayFloor"></span></p>
+                    <p><i class="fas fa-door-open"></i> <strong>Classroom:</strong> <span id="displayClassroom"></span></p>
+                    <p><i class="fas fa-chair"></i> <strong>Seat Position:</strong> Row <span id="displayBenchRow"></span>, Column <span id="displayBenchColumn"></span></p>
+                </div>
+            </div>
+        </section>
+
+        <!-- Right Section: Classroom Layout -->
+        <section class="classroom-section">
+            <div class="classroom-container">
+                <div class="blackboard">
+                    <i class="fas fa-chalkboard-teacher"></i>
+                    <span>Blackboard</span>
+                </div>
+
+                <div class="teachers-desk">
+                    <i class="fas fa-user-tie"></i>
+                    <span>Teacher's Desk</span>
+                </div>
+
+                <div class="seating-area">
+                    <div class="bench-columns">
+                        <div class="bench-column" id="column1"></div>
+                        <div class="aisle"></div>
+                        <div class="bench-column" id="column2"></div>
+                        <div class="aisle"></div>
+                        <div class="bench-column" id="column3"></div>
+                        <div class="aisle"></div>
+                        <div class="bench-column" id="column4"></div>
+                    </div>
+                </div>
+
+                <div class="classroom-door">
+                    <i class="fas fa-door-open"></i>
+                    <span>Entry/Exit</span>
+                </div>
+
+                <div class="seat-legend">
+                    <div class="legend-item">
+                        <div class="bench available"></div>
+                        <span>Available</span>
+                    </div>
+                    <div class="legend-item">
+                        <div class="bench occupied"></div>
+                        <span>Occupied</span>
+                    </div>
+                    <div class="legend-item">
+                        <div class="bench your-seat"></div>
+                        <span>Your Seat</span>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </div>
+</body>
+</html>

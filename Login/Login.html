@@ -1,0 +1,521 @@
+<!DOCTYPE html>
+ <html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Login - Exam Central</title>
+    <link rel="stylesheet" href="Login.css" />
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css"
+    />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600&display=swap"
+      rel="stylesheet"
+    />
+  </head>
+  <body>
+    <div class="login-container">
+      <div class="login-left">
+        <div class="logo">
+          <i class="fas fa-graduation-cap"></i>
+          <span>Exam Central</span>
+        </div>
+        <form class="login-form">
+          <h2>Welcome Back</h2>
+          <p class="subtitle">Please enter your details to continue</p>
+
+          <div class="role-tabs">
+            <button type="button" class="role-tab active" data-role="admin">
+              <i class="fas fa-user-shield"></i>
+              <span>Admin</span>
+            </button>
+            <button type="button" class="role-tab" data-role="faculty">
+              <i class="fas fa-chalkboard-teacher"></i>
+              <span>Faculty</span>
+            </button>
+            <button type="button" class="role-tab" data-role="student">
+              <i class="fas fa-user-graduate"></i>
+              <span>Student</span>
+            </button>
+          </div>
+
+          <div class="form-group username-field">
+            <label for="username">Username</label>
+            <div class="input-wrapper">
+              <input
+                type="text"
+                id="username"
+                placeholder="Enter your username"
+              />
+              <i class="fas fa-user"></i>
+            </div>
+          </div>
+
+          <div class="form-group rollno-field hidden">
+            <label for="rollno">Roll Number</label>
+            <div class="input-wrapper">
+              <input
+                type="text"
+                id="rollno"
+                placeholder="Enter your roll number (e.g., AIML4025)"
+              />
+              <i class="fas fa-id-card"></i>
+            </div>
+          </div>
+
+          <div class="form-group password-field">
+            <label for="password">Password</label>
+            <div class="password-container">
+              <input
+                type="password"
+                id="password"
+                placeholder="Enter your password"
+                required
+              />
+              <i class="fas fa-lock"></i>
+              <i class="fas fa-eye toggle-password" id="togglePassword"></i>
+            </div>
+          </div>
+
+          <div class="form-options">
+            <label class="remember-me">
+              <input type="checkbox" id="rememberMe" />
+              <span>Remember me</span>
+            </label>
+            <a href="#" class="forgot-password">Forgot Password?</a>
+          </div>
+
+          <button type="submit" class="login-btn">
+            <span>Sign In</span>
+            <i class="fas fa-arrow-right"></i>
+          </button>
+        </form>
+      </div>
+
+      <div class="login-right">
+        <div class="content-overlay">
+          <h1>Start your Journey</h1>
+          <p>
+            Welcome to Exam Central - Your Gateway to Seamless Exam Management
+          </p>
+          <div class="decoration-element"></div>
+        </div>
+      </div>
+    </div>
+
+    <div class="toast" id="toast">
+      <div class="toast-content">
+        <i class="fas fa-check-circle"></i>
+        <div class="message">
+          <span class="text">Success</span>
+          <span class="text-2">Login successful!</span>
+        </div>
+      </div>
+      <div class="progress"></div>
+    </div>
+
+    <script>
+      document.addEventListener('DOMContentLoaded', () => {
+        document.querySelectorAll(".role-tab").forEach((tab) => {
+          tab.addEventListener("click", () => {
+            document
+              .querySelectorAll(".role-tab")
+              .forEach((t) => t.classList.remove("active"));
+            tab.classList.add("active");
+
+            const role = tab.dataset.role;
+            const usernameField = document.querySelector(".username-field");
+            const rollNoField = document.querySelector(".rollno-field");
+
+            if (role === "student") {
+              usernameField.classList.add("hidden");
+              rollNoField.classList.remove("hidden");
+            } else {
+              usernameField.classList.remove("hidden");
+              rollNoField.classList.add("hidden");
+            }
+
+            const forgotPassword = document.querySelector(".forgot-password");
+            forgotPassword.style.display = role === "student" ? "none" : "block";
+          });
+        });
+
+        document.querySelector(".login-form").addEventListener("submit", async (e) => {
+          e.preventDefault();
+
+          const role = document.querySelector(".role-tab.active").dataset.role;
+          const password = document.getElementById("password").value;
+          const rememberMe = document.getElementById("rememberMe").checked;
+
+          try {
+              let formData;  // Don't initialize with default values
+              
+              if (role === "student") {
+                  const rollNumber = document.getElementById("rollno").value;
+                  console.log("Student login - Roll number:", rollNumber);
+                  
+                  if (!rollNumber) {
+                      alert("Please enter your roll number");
+                      return;
+                  }
+
+                  // First, check if student exists in admin database
+                  try {
+                      console.log("Verifying student in admin database...");
+                      const adminAuthResponse = await fetch("http://localhost:5001/api/student/auth", {
+                          method: "POST",
+                          headers: {
+                              "Content-Type": "application/json"
+                          },
+                          body: JSON.stringify({ rollNumber })
+                      });
+
+                      if (!adminAuthResponse.ok) {
+                          const errorText = await adminAuthResponse.text();
+                          console.error("Admin verification failed:", errorText);
+                          throw new Error('Failed to verify student');
+                      }
+
+                      const adminAuthData = await adminAuthResponse.json();
+                      if (!adminAuthData.success) {
+                          alert("Invalid roll number. Please check and try again.");
+                          return;
+                      }
+
+                      // Modified formData for student login
+                      formData = {
+                          role: "student",
+                          rollNumber: rollNumber,
+                          password: password
+                      };
+
+                      // Store rollNumber in storage
+                      if (rememberMe) {
+                          localStorage.setItem("rollNumber", rollNumber);
+                      } else {
+                          sessionStorage.setItem("rollNumber", rollNumber);
+                      }
+                  } catch (adminError) {
+                      console.error("Admin verification error:", adminError);
+                      alert("Unable to verify student. Please try again later.");
+                      return;
+                  }
+              } else {
+                  // Handle admin and faculty login
+                  const username = document.getElementById("username").value;
+                  if (!username) {
+                      alert(`Please enter your ${role === "faculty" ? "email" : "username"}`);
+                      return;
+                  }
+                  formData = {
+                      role: role,
+                      username: username,
+                      password: password
+                  };
+              }
+
+              console.log("Login attempt:", formData);
+              
+              // Proceed with login
+              const loginResponse = await fetch("http://localhost:5000/api/auth/login", {
+                  method: "POST",
+                  headers: {
+                      "Content-Type": "application/json"
+                  },
+                  body: JSON.stringify(formData)
+              });
+
+              console.log("Login response status:", loginResponse.status);
+              
+              if (!loginResponse.ok) {
+                  const errorText = await loginResponse.text();
+                  console.error("Login response error:", errorText);
+                  throw new Error('Login failed');
+              }
+
+              const loginData = await loginResponse.json();
+              console.log("Login response data:", loginData);
+
+              if (loginData.success) {
+                  if (rememberMe) {
+                      localStorage.setItem("token", loginData.token);
+                      localStorage.setItem("userRole", role);
+                      if (role === "faculty") {
+                          localStorage.setItem("facultyEmail", formData.username);
+                          localStorage.setItem("facultyName", loginData.faculty.name);
+                      } else if (role === "student") {
+                          localStorage.setItem("rollNumber", formData.rollNumber);
+                      }
+                  } else {
+                      sessionStorage.setItem("token", loginData.token);
+                      sessionStorage.setItem("userRole", role);
+                      if (role === "faculty") {
+                          sessionStorage.setItem("facultyEmail", formData.username);
+                          sessionStorage.setItem("facultyName", loginData.faculty.name);
+                      } else if (role === "student") {
+                          sessionStorage.setItem("rollNumber", formData.rollNumber);
+                      }
+                  }
+
+                  const toast = document.getElementById("toast");
+                  toast.classList.add("active");
+
+                  setTimeout(() => {
+                      switch (role) {
+                          case "admin":
+                              window.location.href = "/Admin/Admin.html";
+                              break;
+                          case "student":
+                              window.location.href = "/Student/studentsection.html";
+                              break;
+                          case "faculty":
+                              window.location.href = "/Faculty/faculty.html";
+                              break;
+                      }
+                  }, 1500);
+              } else {
+                  alert(loginData.message || "Invalid credentials");
+              }
+          } catch (error) {
+              console.error("Login error:", error);
+              alert(error.message || "An error occurred during login. Please try again.");
+          }
+        });
+
+        window.addEventListener("load", () => {
+          const token =
+            localStorage.getItem("token") || sessionStorage.getItem("token");
+          const userRole =
+            localStorage.getItem("userRole") ||
+            sessionStorage.getItem("userRole");
+
+          if (token && userRole) {
+            let redirectUrl;
+            switch (userRole.toLowerCase()) {
+              case "admin":
+                redirectUrl = "/Admin/Admin.html";
+                break;
+              case "faculty":
+                redirectUrl = "/Faculty/faculty.html";
+                break;
+              case "student":
+                redirectUrl = "/Student/studentsection.html";
+                break;
+            }
+            if (window.location.pathname !== redirectUrl) {
+              window.location.href = redirectUrl;
+            }
+          }
+        });
+
+        const togglePassword = document.querySelector(".toggle-password");
+        const passwordInput = document.getElementById("password");
+
+        togglePassword.addEventListener("click", function () {
+          const type =
+            passwordInput.getAttribute("type") === "password"
+              ? "text"
+              : "password";
+          passwordInput.setAttribute("type", type);
+          this.classList.toggle("fa-eye");
+          this.classList.toggle("fa-eye-slash");
+        });
+
+        // Call initializeDashboard
+        initializeDashboard();
+
+        // Add handleStudentSubmit function
+        async function handleStudentSubmit(event) {
+          event.preventDefault();
+          
+          try {
+            const formData = {
+              firstName: document.getElementById('firstName').value,
+              middleName: document.getElementById('middleName').value,
+              lastName: document.getElementById('lastName').value,
+              rollNumber: document.getElementById('rollNumber').value,
+              email: document.getElementById('email').value,
+              phone: document.getElementById('phone').value,
+              branch: document.getElementById('branch').value,
+              semester: document.getElementById('semester').value,
+              academicYear: document.getElementById('academicYear').value
+            };
+
+            if (currentEditingStudent) {
+              // Update existing student
+              await updateStudent(currentEditingStudent, formData);
+              showNotification('Student updated successfully', 'success');
+            } else {
+              // Add new student
+              await addStudent(formData);
+              showNotification('Student added successfully', 'success');
+            }
+
+            // Reset form and refresh student list
+            event.target.reset();
+            currentEditingStudent = null;
+            document.querySelector('.add-student-form h2').textContent = 'Add New Student';
+            document.querySelector('.submit-btn').innerHTML = '<i class="fas fa-save"></i> Save Student';
+            
+            // Switch to view students tab and refresh list
+            document.querySelector('[data-tab="view-students"]').click();
+          } catch (error) {
+            console.error('Error submitting student:', error);
+            showNotification(error.message, 'error');
+          }
+        }
+
+        // Fix loadAnalytics function
+        async function loadAnalytics() {
+          try {
+            // Show loading state
+            document.querySelectorAll('.chart-container').forEach(container => {
+              container.innerHTML = `
+                <div class="loading-state">
+                  <i class="fas fa-spinner fa-spin"></i> Loading analytics...
+                </div>
+              `;
+            });
+
+            const response = await fetch(`${API_URL}/students/analytics`);
+            if (!response.ok) {
+              throw new Error('Failed to fetch analytics data');
+            }
+
+            const data = await response.json();
+            
+            // Clear existing charts
+            ['branchChart', 'semesterChart', 'yearChart'].forEach(chartId => {
+              const chartContainer = document.getElementById(chartId);
+              if (chartContainer) {
+                chartContainer.innerHTML = '<canvas></canvas>';
+              }
+            });
+
+            // Branch Distribution Chart
+            new Chart(document.querySelector('#branchChart canvas'), {
+              type: 'pie',
+              data: {
+                labels: data.branchDistribution.map(item => item._id),
+                datasets: [{
+                  data: data.branchDistribution.map(item => item.count),
+                  backgroundColor: [
+                    '#4361ee', '#3730a3', '#818cf8',
+                    '#06b6d4', '#10b981', '#f59e0b'
+                  ]
+                }]
+              },
+              options: {
+                responsive: true,
+                plugins: {
+                  legend: {
+                    position: 'bottom'
+                  },
+                  title: {
+                    display: true,
+                    text: 'Students by Branch'
+                  }
+                }
+              }
+            });
+
+            // Semester Distribution Chart
+            new Chart(document.querySelector('#semesterChart canvas'), {
+              type: 'bar',
+              data: {
+                labels: data.semesterDistribution
+                  .sort((a, b) => a._id - b._id)
+                  .map(item => `Semester ${item._id}`),
+                datasets: [{
+                  label: 'Number of Students',
+                  data: data.semesterDistribution
+                    .sort((a, b) => a._id - b._id)
+                    .map(item => item.count),
+                  backgroundColor: '#4361ee'
+                }]
+              },
+              options: {
+                responsive: true,
+                plugins: {
+                  legend: {
+                    display: false
+                  },
+                  title: {
+                    display: true,
+                    text: 'Students by Semester'
+                  }
+                },
+                scales: {
+                  y: {
+                    beginAtZero: true,
+                    ticks: {
+                      stepSize: 1
+                    }
+                  }
+                }
+              }
+            });
+
+            // Yearly Enrollment Chart
+            new Chart(document.querySelector('#yearChart canvas'), {
+              type: 'line',
+              data: {
+                labels: data.yearlyEnrollment
+                  .sort((a, b) => a._id - b._id)
+                  .map(item => item._id.toString()),
+                datasets: [{
+                  label: 'Number of Students',
+                  data: data.yearlyEnrollment
+                    .sort((a, b) => a._id - b._id)
+                    .map(item => item.count),
+                  borderColor: '#4361ee',
+                  backgroundColor: 'rgba(67, 97, 238, 0.1)',
+                  fill: true,
+                  tension: 0.3
+                }]
+              },
+              options: {
+                responsive: true,
+                plugins: {
+                  legend: {
+                    display: false
+                  },
+                  title: {
+                    display: true,
+                    text: 'Yearly Student Enrollment'
+                  }
+                },
+                scales: {
+                  y: {
+                    beginAtZero: true,
+                    ticks: {
+                      stepSize: 1
+                    }
+                  }
+                }
+              }
+            });
+
+          } catch (error) {
+            console.error('Error loading analytics:', error);
+            document.querySelectorAll('.chart-container').forEach(container => {
+              container.innerHTML = `
+                <div class="error-message">
+                  <i class="fas fa-exclamation-circle"></i>
+                  <p>${error.message}</p>
+                  <button onclick="loadAnalytics()" class="retry-btn">
+                    <i class="fas fa-sync-alt"></i> Retry
+                  </button>
+                </div>
+              `;
+            });
+          }
+        }
+
+        // Make sure to expose necessary functions to window
+        window.loadAnalytics = loadAnalytics;
+      });
+    </script>
+  </body>
+</html>

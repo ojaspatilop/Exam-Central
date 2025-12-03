@@ -1,0 +1,474 @@
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600&display=swap');
+
+:root {
+    --primary: #3b82f6;
+    --primary-dark: #2563eb;
+    --primary-light: #60a5fa;
+    --secondary: #475569;
+    --accent: #818cf8;
+    --background: #f8fafc;
+    --surface: #ffffff;
+    --text: #1e293b;
+    --text-light: #64748b;
+    --border: #e2e8f0;
+    --shadow: 0 4px 20px rgba(59, 130, 246, 0.1);
+    --gradient: linear-gradient(135deg, #3b82f6 0%, #2563eb 100%);
+}
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: 'Poppins', sans-serif;
+    background: linear-gradient(135deg, #f1f5f9 0%, #e2e8f0 100%);
+    color: var(--text);
+    min-height: 100vh;
+    line-height: 1.6;
+}
+
+.main-container {
+    display: flex;
+    flex-wrap: wrap;
+    min-height: 100vh;
+    padding: 15px;
+    gap: 15px;
+}
+
+.nav-options-card {
+    flex: 0 0 100%;
+    display: flex;
+    justify-content: center;
+    padding: 0.12rem;
+}
+
+.nav-header {
+    text-align: center;
+}
+
+.nav-header i {
+    font-size: 1.5rem;
+    color: var(--primary-color, #4361ee);
+    margin-bottom: 0.3rem;
+}
+
+.nav-header h2 {
+    font-size: 1.2rem;
+    color: var(--text-primary, #2b2d42);
+    margin-bottom: 0.2rem;
+}
+
+.options-grid {
+    background: white;
+    border-radius: 8px;
+    box-shadow: 0 2px 6px rgba(67, 97, 238, 0.06);
+    display: flex;
+    align-items: center;
+    gap: 1.2rem;
+    padding: 0.2rem 1.2rem;
+    width: auto;
+    height: 1.8rem;
+    border: 1px solid rgba(67, 97, 238, 0.08);
+}
+
+.option-button {
+    background: transparent;
+    border: none;
+    padding: 0.12rem 0.6rem;
+    border-radius: 6px;
+    display: flex;
+    align-items: center;
+    gap: 0.4rem;
+    font-size: 0.75rem;
+    font-weight: 500;
+    color: var(--text-primary, #2b2d42);
+    transition: all 0.2s cubic-bezier(0.4, 0, 0.2, 1);
+    cursor: pointer;
+    height: 1.4rem;
+    opacity: 0.75;
+}
+
+.option-button i {
+    font-size: 0.85rem;
+}
+
+.option-button:hover, .option-button.active {
+    background: rgba(67, 97, 238, 0.08);
+    color: var(--primary-color, #4361ee);
+    opacity: 1;
+    transform: none;
+    box-shadow: none;
+}
+
+.option-button.active {
+    background: var(--primary-color, #4361ee);
+    color: white;
+    opacity: 1;
+}
+
+/* Left Section Styling */
+.left-section {
+    flex: 0.7;
+    min-width: 300px;
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
+    height: calc(100vh - 80px);
+}
+
+.form-card, .info-card {
+    border-radius: 0.5rem;
+    padding: 0.5rem;
+    box-shadow: var(--shadow);
+    transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    backdrop-filter: blur(10px);
+}
+
+.form-card {
+    flex: 1;
+}
+
+.info-card {
+    flex: 1;
+}
+
+.form-card:hover, .info-card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 8px 30px rgba(59, 130, 246, 0.15);
+}
+
+.compact-heading {
+    font-size: 0.9rem;
+    margin-bottom: 0.5rem;
+}
+
+h2 {
+    color: var(--primary-dark);
+    font-size: 1.75rem;
+    margin-bottom: 2rem;
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+    letter-spacing: -0.5px;
+}
+
+h2 i {
+    font-size: 1rem;
+    background: var(--gradient);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+}
+
+/* Form Elements */
+.input-group {
+    margin-bottom: 0.35rem;
+}
+
+.input-group label {
+    display: flex;
+    align-items: center;
+    gap: 0.25rem;
+    margin-bottom: 0.15rem;
+    color: var(--text);
+    font-weight: 500;
+    font-size: 0.8rem;
+}
+
+.input-group label i {
+    color: var(--primary);
+    font-size: 0.8rem;
+}
+
+.input-group input,
+.input-group select {
+    width: 100%;
+    padding: 0.35rem;
+    border: 2px solid var(--border);
+    border-radius: 0.35rem;
+    font-size: 0.8rem;
+    transition: all 0.3s ease;
+    background: var(--background);
+    color: var(--text);
+}
+
+.input-group input:hover,
+.input-group select:hover {
+    border-color: var(--primary-light);
+}
+
+.input-group input:focus,
+.input-group select:focus {
+    border-color: var(--primary);
+    outline: none;
+    box-shadow: 0 0 0 4px rgba(59, 130, 246, 0.15);
+}
+
+button {
+    width: 100%;
+    padding: 0.5rem;
+    background: var(--gradient);
+    color: white;
+    border: none;
+    border-radius: 0.5rem;
+    font-size: 0.8rem;
+    font-weight: 600;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 0.5rem;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+}
+
+button:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 8px 20px rgba(59, 130, 246, 0.2);
+}
+
+/* Seat Info Styling */
+.seat-info p {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    margin-bottom: 0.15rem;
+    padding: 0.25rem;
+    border-radius: 0.35rem;
+    background: var(--background);
+    font-size: 0.75rem;
+}
+
+.seat-info i {
+    color: var(--primary);
+    font-size: 0.8rem;
+}
+
+/* Classroom Layout Styling */
+.classroom-section {
+    flex: 1.3;
+    min-width: 400px;
+    height: calc(100vh - 80px);
+    border-radius: 0.75rem;
+    padding: 0.75rem;
+    box-shadow: var(--shadow);
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
+    background: var(--surface);
+}
+
+.classroom-container {
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+}
+
+/* Slimmer Blackboard */
+.blackboard {
+    background: linear-gradient(45deg, #1e293b, #334155);
+    color: white;
+    padding: 0.35rem 0.75rem;
+    border-radius: 0.5rem;
+    text-align: center;
+    font-size: 0.8rem;
+    width: 70%;
+    margin: 0 auto;
+    height: 1.5rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 1rem;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+}
+
+/* Compact Teacher's Desk */
+.teachers-desk {
+    background: #f1f5f9;
+    padding: 0.35rem 0.75rem;
+    border-radius: 0.5rem;
+    width: 100px;
+    margin: 0.5rem auto;
+    text-align: center;
+    font-size: 0.75rem;
+    border: 2px solid var(--border);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 0.5rem;
+}
+
+/* Seating Area */
+.seating-area {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    padding: 0.5rem 0.25rem;
+    margin: 0.5rem 0;
+}
+
+.bench-columns {
+    display: grid;
+    grid-template-columns: repeat(7, 1fr); /* 4 columns + 3 aisles */
+    gap: 0.25rem;
+    align-items: start;
+}
+
+.bench-column {
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
+}
+
+.aisle {
+    width: 0.5rem;
+    background: rgba(203, 213, 225, 0.3);
+    border-radius: 0.25rem;
+}
+
+/* Bench Styling */
+.bench {
+    background: var(--surface);
+    border: 2px solid var(--border);
+    border-radius: 0.5rem;
+    padding: 0.35rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 0.5rem;
+    transition: all 0.3s ease;
+    cursor: pointer;
+    position: relative;
+}
+
+.bench::before {
+    content: '\f518'; /* Font Awesome chair icon */
+    font-family: 'Font Awesome 6 Free';
+    font-weight: 900;
+    font-size: 0.9rem;
+    color: var(--text-light);
+}
+
+.bench.available {
+    background: rgba(59, 130, 246, 0.1);
+    border-color: var(--primary-light);
+}
+
+.bench.available::before {
+    color: var(--primary);
+}
+
+.bench.occupied {
+    background: #fee2e2;
+    border-color: #ef4444;
+}
+
+.bench.occupied::before {
+    color: #ef4444;
+}
+
+.bench.your-seat {
+    background: var(--primary);
+    border-color: var(--primary-dark);
+}
+
+.bench.your-seat::before {
+    color: white;
+}
+
+/* Hover Effects */
+.bench:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05);
+}
+
+/* Door Styling */
+.classroom-door {
+    align-self: center;
+    padding: 0.5rem 1rem;
+    background: #f1f5f9;
+    border-radius: 0.5rem;
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    font-size: 0.8rem;
+    border: 2px solid var(--border);
+    margin: 0.5rem 0;
+}
+
+/* Legend Styling */
+.seat-legend {
+    display: flex;
+    justify-content: center;
+    gap: 1rem;
+    padding: 0.5rem;
+    background: var(--background);
+    border-radius: 0.5rem;
+}
+
+.legend-item {
+    display: flex;
+    align-items: center;
+    gap: 0.35rem;
+    font-size: 0.75rem;
+}
+
+/* Media Queries */
+@media (max-width: 1200px) {
+    .options-grid {
+        width: 50vw;
+    }
+}
+
+@media (max-width: 992px) {
+    .options-grid {
+        width: 60vw;
+    }
+}
+
+@media (max-width: 768px) {
+    .options-grid {
+        padding: 0.2rem 0.8rem;
+        gap: 0.8rem;
+    }
+    
+    .option-button {
+        padding: 0.12rem 0.4rem;
+        font-size: 0.7rem;
+    }
+}
+
+@media (max-width: 480px) {
+    .options-grid {
+        width: 95vw;
+    }
+}
+
+@media (max-width: 1280px) {
+    .main-container {
+        grid-template-columns: 30% 70%;
+    }
+}
+
+@media (max-width: 1024px) {
+    .main-container {
+        grid-template-columns: 1fr;
+    }
+    
+    .form-card, .info-card, .classroom-section {
+        padding: 0.5rem;
+    }
+    
+    h2 {
+        font-size: 1.5rem;
+    }
+    
+    .bench {
+        padding: 1rem;
+    }
+}

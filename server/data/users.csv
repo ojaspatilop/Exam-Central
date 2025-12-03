@@ -1,0 +1,9 @@
+username,password,role,rollNumber,email
+admin,admin123,admin,,admin@college.edu
+faculty1,faculty123,faculty,,faculty1@college.edu
+faculty2,faculty123,faculty,,faculty2@college.edu
+,student123,student,CS2023001,student1@college.edu
+,student123,student,CS2023002,student2@college.edu
+,student123,student,CS2023003,student3@college.edu
+,student123,student,IT2023001,student4@college.edu
+,student123,student,IT2023002,student5@college.edu 

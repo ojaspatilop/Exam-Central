@@ -1,0 +1,132 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Register - Exam Central</title>
+    <link rel="stylesheet" href="Register.css" />
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css"
+    />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600&display=swap"
+      rel="stylesheet"
+    />
+  </head>
+  <body>
+    <div class="register-container">
+      <div class="register-left">
+        <div class="logo">
+          <i class="fas fa-graduation-cap"></i>
+          <span>Exam Central</span>
+        </div>
+        <form class="register-form">
+          <h2>Create Account</h2>
+          <p class="subtitle">Please fill in the details to register</p>
+
+          <div class="form-group">
+            <label for="fullname">Full Name</label>
+            <div class="input-wrapper">
+              <input
+                type="text"
+                id="fullname"
+                placeholder="Enter your full name"
+                required
+              />
+              <i class="fas fa-user"></i>
+            </div>
+          </div>
+
+          <div class="form-group">
+            <label for="email">Email</label>
+            <div class="input-wrapper">
+              <input
+                type="email"
+                id="email"
+                placeholder="Enter your email"
+                required
+              />
+              <i class="fas fa-envelope"></i>
+            </div>
+          </div>
+
+          <div class="form-group">
+            <label for="username">Username</label>
+            <div class="input-wrapper">
+              <input
+                type="text"
+                id="username"
+                placeholder="Choose a username"
+                required
+              />
+              <i class="fas fa-at"></i>
+            </div>
+          </div>
+
+          <div class="form-group">
+            <label for="password">Password</label>
+            <div class="input-wrapper">
+              <input
+                type="password"
+                id="password"
+                placeholder="Create a password"
+                required
+              />
+              <i class="fas fa-lock"></i>
+            </div>
+          </div>
+
+          <div class="form-group">
+            <label for="confirm-password">Confirm Password</label>
+            <div class="input-wrapper">
+              <input
+                type="password"
+                id="confirm-password"
+                placeholder="Confirm your password"
+                required
+              />
+              <i class="fas fa-lock"></i>
+            </div>
+          </div>
+
+          <div class="form-group">
+            <label for="role">Register As</label>
+            <div class="role-selector">
+              <select id="role" required>
+                <option value="" disabled selected>Select Role</option>
+                <option value="faculty">Faculty</option>
+                <option value="student">Student</option>
+              </select>
+              <i class="fas fa-chevron-down"></i>
+            </div>
+          </div>
+
+          <div class="form-options">
+            <label class="terms">
+              <input type="checkbox" required />
+              <span>I agree to the Terms and Conditions</span>
+            </label>
+          </div>
+
+          <button type="submit" class="register-btn">
+            <span>Create Account</span>
+            <i class="fas fa-arrow-right"></i>
+          </button>
+
+          <div class="login-link">
+            Already have an account? <a href="Login.html">Sign In</a>
+          </div>
+        </form>
+      </div>
+
+      <div class="register-right">
+        <div class="content-overlay">
+          <h1>Welcome to Exam Central</h1>
+          <p>Join us to experience seamless exam management</p>
+          <div class="decoration-element"></div>
+        </div>
+      </div>
+    </div>
+  </body>
+</html>

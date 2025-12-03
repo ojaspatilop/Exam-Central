@@ -1,0 +1,2123 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Admin Dashboard - Exam Central</title>
+    <link rel="stylesheet" href="Admin.css" />
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css"
+    />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600&display=swap"
+      rel="stylesheet"
+    />
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <script defer src="Admin.js"></script>
+    <script src="js/timetable.js" defer></script>
+    <link rel="stylesheet" href="css/timetable.css">
+  </head>
+  <body>
+    <!-- Dashboard Container -->
+    <div class="dashboard-container">
+      <!-- Sidebar -->
+      <aside class="sidebar">
+        <div class="sidebar-header">
+          <i class="fas fa-university"></i>
+          <h2>Admin Portal</h2>
+        </div>
+        <nav class="sidebar-nav">
+          <button class="nav-item active" data-section="home">
+            <i class="fas fa-home"></i>
+            <span>Home</span>
+          </button>
+          <button class="nav-item" data-section="students">
+            <i class="fas fa-users"></i>
+            <span>Student Information</span>
+          </button>
+          <button class="nav-item" data-section="allocations">
+            <i class="fas fa-tasks"></i>
+            <span>Allocations</span>
+          </button>
+          <button class="nav-item" data-section="supervisors">
+            <i class="fas fa-user-tie"></i>
+            <span>Manage Supervisors</span>
+          </button>
+          <button class="nav-item" data-section="virtual">
+            <i class="fas fa-laptop"></i>
+            <span>Classrooms</span>
+          </button>
+          <button class="nav-item" data-section="results">
+            <i class="fas fa-graduation-cap"></i>
+            <span>Manage Results</span>
+          </button>
+          
+        </nav>
+      </aside>
+
+      <!-- Main Content -->
+      <main class="main-content">
+        <header class="content-header">
+          <div class="header-left">
+            <h1 id="section-title">Dashboard Overview</h1>
+          </div>
+          <div class="header-right">
+            <div class="admin-info">
+              <span class="admin-name">Admin</span>
+              <img
+                src="https://ui-avatars.com/api/?name=Admin&background=4361ee&color=fff"
+                alt="Admin"
+                class="admin-avatar"
+                id="adminAvatar"
+              />
+              <div class="admin-dropdown" id="adminDropdown">
+                <div class="dropdown-header">
+                  <strong>Admin Account</strong>
+                </div>
+                <div class="dropdown-divider"></div>
+                <button id="logoutBtn" class="dropdown-item logout-btn">
+                  <i class="fas fa-sign-out-alt"></i> Logout
+                </button>
+              </div>
+            </div>
+          </div>
+        </header>
+
+        <!-- Home Section -->
+        <section id="home" class="content-section active">
+          <div class="dashboard-grid">
+            <div class="welcome-banner">
+              <div class="welcome-content">
+                <h1>Welcome back, <span id="adminName">Admin</span></h1>
+                <p>Here's what's happening with your examination portal today</p>
+              </div>
+              <div class="welcome-illustration">
+                <i class="fas fa-chart-line"></i>
+              </div>
+            </div>
+            
+            <div class="stats-container">
+              <div class="stat-card">
+                <div class="stat-icon">
+                  <i class="fas fa-user-graduate"></i>
+                </div>
+                <div class="stat-info">
+                  <h3>Total Students</h3>
+                  <p id="totalStudents">0</p>
+                  <div class="stat-trend">
+                    <i class="fas fa-arrow-up"></i>
+                    <span>Since last month</span>
+                  </div>
+                </div>
+              </div>
+              
+              <div class="stat-card">
+                <div class="stat-icon">
+                  <i class="fas fa-ticket-alt"></i>
+                </div>
+                <div class="stat-info">
+                  <h3>Hall Tickets</h3>
+                  <p id="totalHallTickets">0</p>
+                  <div class="stat-trend">
+                    <i class="fas fa-arrow-up"></i>
+                    <span>Since last week</span>
+                  </div>
+                </div>
+              </div>
+              
+              <div class="stat-card">
+                <div class="stat-icon">
+                  <i class="fas fa-chalkboard-teacher"></i>
+                </div>
+                <div class="stat-info">
+                  <h3>Supervisors</h3>
+                  <p id="totalSupervisors">0</p>
+                  <div class="stat-trend">
+                    <i class="fas fa-arrow-up"></i>
+                    <span>Since last month</span>
+                  </div>
+                </div>
+              </div>
+              
+              <div class="stat-card">
+                <div class="stat-icon">
+                  <i class="fas fa-graduation-cap"></i>
+                </div>
+                <div class="stat-info">
+                  <h3>Grade Cards</h3>
+                  <p id="totalGradeCards">0</p>
+                  <div class="stat-trend">
+                    <i class="fas fa-arrow-up"></i>
+                    <span>Since last week</span>
+                  </div>
+                </div>
+              </div>
+            </div>
+            
+            <div class="quick-actions">
+              <h2>Quick Actions</h2>
+              <div class="actions-grid">
+                <button class="action-card" data-section="students">
+                  <i class="fas fa-user-plus"></i>
+                  <span>Add Student</span>
+                </button>
+                <button class="action-card" data-section="allocations">
+                  <i class="fas fa-ticket-alt"></i>
+                  <span>Hall Tickets</span>
+                </button>
+                <button class="action-card" data-section="supervisors">
+                  <i class="fas fa-user-tie"></i>
+                  <span>Manage Supervisors</span>
+                </button>
+                <button class="action-card" data-section="results">
+                  <i class="fas fa-file-alt"></i>
+                  <span>View Results</span>
+                </button>
+              </div>
+            </div>
+          </div>
+        </section>
+
+        <!-- Student Information Section -->
+        <section id="students" class="content-section">
+          <div class="students-container">
+            <!-- Student Management Tabs -->
+            <div class="student-tabs">
+              <button class="tab-btn active" data-tab="add-student">
+                <i class="fas fa-user-plus"></i> Add Student
+              </button>
+              <button class="tab-btn" data-tab="view-students">
+                <i class="fas fa-users"></i> View Students
+              </button>
+              <button class="tab-btn" data-tab="student-analytics">
+                <i class="fas fa-chart-bar"></i> Analytics
+              </button>
+            </div>
+
+            <!-- Add Student Form -->
+            <div class="tab-content active" id="add-student">
+              <div class="add-student-form">
+                <h2>Add New Student</h2>
+                <p class="form-description">Enter student details to register them in the system</p>
+                <form id="studentForm">
+                  <!-- Personal Information -->
+                  <div class="form-section">
+                    <h3><i class="fas fa-user"></i> Personal Information</h3>
+                    <div class="form-group">
+                      <div class="form-field">
+                        <label for="firstName">First Name</label>
+                        <input type="text" id="firstName" required placeholder="First Name">
+                      </div>
+                      <div class="form-field">
+                        <label for="middleName">Middle Name</label>
+                        <input type="text" id="middleName" placeholder="Middle Name">
+                      </div>
+                      <div class="form-field">
+                        <label for="lastName">Last Name</label>
+                        <input type="text" id="lastName" required placeholder="Last Name">
+                      </div>
+                    </div>
+                  </div>
+
+                  <!-- Academic Information -->
+                  <div class="form-section">
+                    <h3><i class="fas fa-graduation-cap"></i> Academic Information</h3>
+                    <div class="form-group">
+                      <div class="form-field">
+                        <label for="rollNumber">Roll Number</label>
+                        <input type="text" id="rollNumber" required placeholder="Roll Number">
+                      </div>
+                      <div class="form-field">
+                        <label for="branch">Branch</label>
+                        <select id="branch" required aria-label="Branch" title="Select branch">
+                          <option value="">Select Branch</option>
+                          <option value="CS">Computer Science</option>
+                          <option value="IT">Information Technology</option>
+                          <option value="AIML">AIML</option>
+                          <option value="DS">DS</option>
+                          <option value="MECHANICAL">Mechanical Engineering</option>
+                        </select>
+                      </div>
+                    </div>
+                    <div class="form-group">
+                      <div class="form-field">
+                        <label for="semester">Current Semester</label>
+                        <select id="semester" required aria-label="Semester" title="Select semester">
+                          <option value="">Select Semester</option>
+                          <option value="1">Semester 1</option>
+                          <option value="2">Semester 2</option>
+                          <option value="3">Semester 3</option>
+                          <option value="4">Semester 4</option>
+                          <option value="5">Semester 5</option>
+                          <option value="6">Semester 6</option>
+                          <option value="7">Semester 7</option>
+                          <option value="8">Semester 8</option>
+                        </select>
+                      </div>
+                      <div class="form-field">
+                        <label for="academicYear">Academic Year</label>
+                        <select id="academicYear" required aria-label="Academic Year" title="Select academic year">
+                          <option value="">Select Year</option>
+                          <option value="2024">2024</option>
+                          <option value="2023">2023</option>
+                          <option value="2022">2022</option>
+                          <option value="2021">2021</option>
+                        </select>
+                      </div>
+                    </div>
+                  </div>
+
+                  <!-- Contact Information -->
+                  <div class="form-section">
+                    <h3><i class="fas fa-address-card"></i> Contact Information</h3>
+                    <div class="form-group">
+                      <div class="form-field">
+                        <label for="email">Email Address</label>
+                        <input type="email" id="email" required placeholder="Email">
+                      </div>
+                      <div class="form-field">
+                        <label for="phone">Phone Number</label>
+                        <input type="tel" id="phone" required placeholder="Phone Number">
+                      </div>
+                    </div>
+                  </div>
+
+                  <div class="form-actions">
+                    <button type="reset" class="reset-btn">
+                      <i class="fas fa-undo"></i> Reset
+                    </button>
+                    <button type="submit" class="submit-btn">
+                      <i class="fas fa-save"></i> Save Student
+                    </button>
+                  </div>
+                </form>
+              </div>
+            </div>
+
+            <!-- View Students -->
+            <div class="tab-content" id="view-students">
+              <div class="student-list">
+                <div class="list-header">
+                  <div class="list-title">
+                    <h2>Student Directory</h2>
+                    <p>Manage and view all registered students</p>
+                  </div>
+                  <div class="list-actions">
+                    <div class="search-container">
+                      <input type="text" id="searchStudent" placeholder="Search students...">
+                      <i class="fas fa-search"></i>
+                    </div>
+                    <div class="filter-container">
+                      <select id="filterBranch" aria-label="Filter by branch">
+                        <option value="">All Branches</option>
+                        <option value="CS">Computer Science</option>
+                        <option value="IT">Information Technology</option>
+                        <option value="AIML">AIML</option>
+                        <option value="DS">DS</option>
+                        <option value="MECHANICAL">Mechanical Engineering</option>
+                      </select>
+                      <select id="filterSemester" aria-label="Filter by semester">
+                        <option value="">All Semesters</option>
+                        <option value="1">Semester 1</option>
+                        <option value="2">Semester 2</option>
+                        <option value="3">Semester 3</option>
+                        <option value="4">Semester 4</option>
+                        <option value="5">Semester 5</option>
+                        <option value="6">Semester 6</option>
+                        <option value="7">Semester 7</option>
+                        <option value="8">Semester 8</option>
+                      </select>
+                    </div>
+                  </div>
+                </div>
+                
+                <div class="table-container">
+                  <table>
+                    <thead>
+                      <tr>
+                        <th>Roll No.</th>
+                        <th>Name</th>
+                        <th>Branch</th>
+                        <th>Semester</th>
+                        <th>Academic Year</th>
+                        <th>Email</th>
+                        <th>Phone</th>
+                        <th>Actions</th>
+                      </tr>
+                    </thead>
+                    <tbody id="studentTableBody">
+                      <!-- Student data will be dynamically populated here -->
+                    </tbody>
+                  </table>
+                </div>
+
+                <!-- Pagination -->
+                <div class="pagination">
+                  <button class="pagination-btn" id="prevPage" disabled>
+                    <i class="fas fa-chevron-left"></i> Previous
+                  </button>
+                  <span class="page-info">Page <span id="currentPage">1</span> of <span id="totalPages">1</span></span>
+                  <button class="pagination-btn" id="nextPage">
+                    Next <i class="fas fa-chevron-right"></i>
+                  </button>
+                </div>
+              </div>
+            </div>
+
+            <!-- Student Analytics -->
+            <div class="tab-content" id="student-analytics">
+              <div class="analytics-container">
+                <div class="analytics-header">
+                  <h2>Student Analytics</h2>
+                  <p>Overview and statistics of student data</p>
+                </div>
+                <div class="analytics-grid">
+                  <div class="analytics-card">
+                    <h3>Branch Distribution</h3>
+                    <div class="chart-container" id="branchChart">
+                      <!-- Chart will be rendered here -->
+                    </div>
+                  </div>
+                  <div class="analytics-card">
+                    <h3>Semester Distribution</h3>
+                    <div class="chart-container" id="semesterChart">
+                      <!-- Chart will be rendered here -->
+                    </div>
+                  </div>
+                  <div class="analytics-card">
+                    <h3>Yearly Enrollment</h3>
+                    <div class="chart-container" id="yearChart">
+                      <!-- Chart will be rendered here -->
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </section>
+
+        <!-- Allocations Section -->
+        <section id="allocations" class="content-section">
+          <div class="allocations-container">
+            <!-- Allocation Management Tabs -->
+            <div class="allocation-tabs">
+              <button class="tab-btn active" data-tab="hall-tickets">
+                <i class="fas fa-ticket-alt"></i> Hall Tickets
+              </button>
+              <button class="tab-btn" data-tab="manage-allocations">
+                <i class="fas fa-tasks"></i> Manage Allocations
+              </button>
+            </div>
+
+            <!-- Hall Tickets Tab -->
+            <div class="tab-content active" id="hall-tickets">
+              <div class="hall-ticket-list">
+                <div class="list-header">
+                  <div class="list-title">
+                    <h2>Student Hall Tickets</h2>
+                    <p>View all generated hall tickets</p>
+                  </div>
+                  <div class="list-actions">
+                    
+                    <div class="filter-container">
+                      <select id="filterHallTicketBranch" aria-label="Filter by branch">
+                        <option value="">All Branches</option>
+                        <option value="CS">Computer Science</option>
+                        <option value="IT">Information Technology</option>
+                        <option value="AIML">AIML</option>
+                        <option value="DS">DS</option>
+                        <option value="MECHANICAL">Mechanical Engineering</option>
+                      </select>
+                      <select id="filterHallTicketSemester" aria-label="Filter by semester">
+                        <option value="">All Semesters</option>
+                        <option value="1">Semester 1</option>
+                        <option value="2">Semester 2</option>
+                        <option value="3">Semester 3</option>
+                        <option value="4">Semester 4</option>
+                        <option value="5">Semester 5</option>
+                        <option value="6">Semester 6</option>
+                        <option value="7">Semester 7</option>
+                        <option value="8">Semester 8</option>
+                      </select>
+                    </div>
+                  </div>
+                </div>
+                
+                <div class="table-container">
+                  <table>
+                    <thead>
+                      <tr>
+                        <th>Hall Ticket No.</th>
+                        <th>Roll No.</th>
+                        <th>Name</th>
+                        <th>Branch</th>
+                        <th>Semester</th>
+                        <th>Examination</th>
+                        <th>Generated Date</th>
+                        <th>Actions</th>
+                      </tr>
+                    </thead>
+                    <tbody id="hallTicketTableBody">
+                      <!-- Hall ticket data will be dynamically populated here -->
+                    </tbody>
+                  </table>
+                </div>
+
+                <!-- Pagination for hall tickets -->
+                <div class="pagination">
+                  <button class="pagination-btn" id="prevHallTicketPage" disabled>
+                    <i class="fas fa-chevron-left"></i> Previous
+                  </button>
+                  <span class="page-info">Page <span id="currentHallTicketPage">1</span> of <span id="totalHallTicketPages">1</span></span>
+                  <button class="pagination-btn" id="nextHallTicketPage">
+                    Next <i class="fas fa-chevron-right"></i>
+                  </button>
+                </div>
+
+                <!-- Allocate Classrooms Button -->
+                <div class="allocate-classroom-container">
+                  <button class="allocate-classroom-btn" id="allocateClassroomBtn">
+                    <i class="fas fa-chalkboard"></i>
+                    Allocate Classrooms
+                  </button>
+                  <p class="helper-text">Click to assign classrooms for selected students</p>
+                </div>
+              </div>
+            </div>
+
+            <!-- Manage Allocations Tab -->
+            <div class="tab-content" id="manage-allocations">
+              <div class="allocation-list">
+                <div class="list-header">
+                  <div class="list-title">
+                    <h2>Manage Allocations</h2>
+                    <p>View and manage all classroom allocations</p>
+                  </div>
+                  <div class="list-actions">
+                    
+                    <button id="resetClassroomAllocationsBtn" class="danger-btn">
+                      <i class="fas fa-trash"></i> Reset All Allocations
+                    </button>
+                  </div>
+                </div>
+                
+                <div class="table-responsive">
+                  <table id="allocationsTable" class="table table-striped">
+                    <thead>
+                      <tr>
+                        <th>Roll No</th>
+                        <th>Hall Ticket No</th>
+                        <th>Name</th>
+                        <th>Branch</th>
+                        <th>Semester</th>
+                        <th>Paper</th>
+                        <th>Classroom</th>
+                        <th>Bench No</th>
+                        <th>Date & Time</th>
+                      </tr>
+                    </thead>
+                    <tbody>
+                      <!-- Allocations will be displayed here -->
+                    </tbody>
+                  </table>
+                </div>
+
+                <!-- Pagination for allocations -->
+                <div class="pagination">
+                  <button class="pagination-btn" id="prevAllocationPage" disabled>
+                    <i class="fas fa-chevron-left"></i> Previous
+                  </button>
+                  <span class="page-info">Page <span id="currentAllocationPage">1</span> of <span id="totalAllocationPages">1</span></span>
+                  <button class="pagination-btn" id="nextAllocationPage">
+                    Next <i class="fas fa-chevron-right"></i>
+                  </button>
+                </div>
+              </div>
+            </div>
+          </div>
+        </section>
+
+        <!-- Virtual Classroom Section -->
+        <section id="virtual" class="content-section">
+          <div class="section-header">
+            <h1 id="virtual-title">Seating Arrangements</h1>
+            <p>View and manage classroom seating allocations</p>
+          </div>
+
+          <div class="classroom-controls">
+            <div class="control-group">
+              <label for="classroomSelector">Select Classroom:</label>
+              <select id="classroomSelector" class="form-control">
+                <option value="">Select a classroom</option>
+                <!-- Will be populated dynamically -->
+              </select>
+            </div>
+            <div class="control-group">
+              <label for="paperSelector">Paper:</label>
+              <select id="paperSelector" class="form-control">
+                <option value="">All Papers</option>
+                <option value="AIML604">AIML604</option>
+                <option value="AIML602">AIML602</option>
+                <option value="AIML601">AIML601</option>
+                <option value="ITC604">ITC604</option>
+                <option value="ITC601">ITC601</option>
+                <option value="CSC502">CSC502</option>
+                <!-- Will be populated dynamically -->
+              </select>
+            </div>
+            <button id="viewSeatingBtn" class="btn primary-btn">
+              <i class="fas fa-eye"></i> View Seating
+            </button>
+          </div>
+
+          <div class="classroom-layout-container">
+            <div class="classroom-info">
+              <div class="info-card">
+                <h3>Classroom Information</h3>
+                <div class="info-item">
+                  <i class="fas fa-chalkboard"></i>
+                  <span>Room: <strong id="displayRoom">-</strong></span>
+                </div>
+                <div class="info-item">
+                  <i class="fas fa-calendar-day"></i>
+                  <span>Date: <strong id="displayDate">-</strong></span>
+                </div>
+                <div class="info-item">
+                  <i class="fas fa-clock"></i>
+                  <span>Time: <strong id="displayTime">-</strong></span>
+                </div>
+                <div class="info-item">
+                  <i class="fas fa-book"></i>
+                  <span>Paper: <strong id="displayPaper">-</strong></span>
+                </div>
+                <div class="info-item">
+                  <i class="fas fa-users"></i>
+                  <span>Total Students: <strong id="displayTotalStudents">0</strong></span>
+                </div>
+                <div class="info-item">
+                  <i class="fas fa-chair"></i>
+                  <span>Total Seats: <strong id="displayTotalSeats">0</strong></span>
+                </div>
+                <div class="info-item">
+                  <i class="fas fa-percentage"></i>
+                  <span>Occupancy: <strong id="displayOccupancy">0%</strong></span>
+                </div>
+              </div>
+              <div class="legend-card">
+                <h3>Legend</h3>
+                <div class="legend-item">
+                  <div class="seat-icon empty"></div>
+                  <span>Empty Seat</span>
+                </div>
+                <div class="legend-item">
+                  <div class="seat-icon occupied"></div>
+                  <span>Occupied Seat</span>
+                </div>
+               
+              </div>
+            </div>
+
+            <div class="classroom-layout">
+              <div class="classroom-header">
+                <div class="teacher-desk">
+                  <i class="fas fa-chalkboard-teacher"></i>
+                  <div class="teacher-info">
+                    <span class="teacher-label">Supervisor:</span>
+                    <span id="assignedTeacher">Not Assigned</span>
+                  </div>
+                </div>
+              </div>
+              <div id="seatingContainer" class="seating-container">
+                <!-- Seating layout will be generated here -->
+                <div class="empty-state">
+                  <i class="fas fa-chair fa-3x"></i>
+                  <p>Select a classroom and date to view seating arrangement</p>
+                </div>
+              </div>
+            </div>
+
+            <div class="student-info-panel" id="studentInfoPanel">
+              <div class="panel-header">
+                <h3>Student Information</h3>
+                <button class="close-btn" id="closeStudentInfo">
+                  <i class="fas fa-times"></i>
+                </button>
+              </div>
+              <div class="student-details">
+                <div class="student-photo">
+                  <i class="fas fa-user-graduate fa-5x"></i>
+                </div>
+                <div class="student-data">
+                  <p><strong>Name:</strong> <span id="studentName">-</span></p>
+                  <p><strong>Roll No:</strong> <span id="studentRollNo">-</span></p>
+                  <p><strong>Hall Ticket:</strong> <span id="studentHallTicket">-</span></p>
+                  <p><strong>Branch:</strong> <span id="studentBranch">-</span></p>
+                  <p><strong>Semester:</strong> <span id="studentSemester">-</span></p>
+                  <p><strong>Paper:</strong> <span id="studentPaper">-</span></p>
+                  <p><strong>Bench No:</strong> <span id="studentBench">-</span></p>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          
+        </section>
+
+        <!-- Add this to the virtual section in Admin.html -->
+        <section id="virtual" class="content-section">
+          <div class="classrooms-container">
+            <div class="section-header">
+              <h2><i class="fas fa-door-open"></i> Classroom Allocations</h2>
+              <p>View and manage classroom allocations for exams</p>
+            </div>
+            
+            <!-- Add filters for classrooms and papers -->
+            <div class="filter-group">
+              <div class="filter-item">
+                <i class="fas fa-door-open"></i>
+                <select id="filterClassroom" class="form-select">
+                  <option value="">All Classrooms</option>
+                  <!-- Will be populated dynamically -->
+                </select>
+              </div>
+              <div class="filter-item">
+                <i class="fas fa-book"></i>
+                <select id="filterPaper" class="form-select">
+                  <option value="">All Papers</option>
+                  <!-- Will be populated dynamically -->
+                </select>
+              </div>
+              <div class="list-actions">
+                <button id="resetClassroomAllocationsBtn" class="danger-btn">
+                  <i class="fas fa-trash"></i> Reset All Allocations
+                </button>
+              </div>
+            </div>
+            
+            <!-- Classroom allocations table -->
+            <div class="table-container">
+              <table class="data-table">
+                <thead>
+                  <tr>
+                    <th>Classroom</th>
+                    <th>Student Roll No</th>
+                    <th>Paper</th>
+                    <th>Exam Date</th>
+                    <th>Exam Time</th>
+                    <th>Bench Number</th>
+                  </tr>
+                </thead>
+                <tbody id="classroomAllocationTableBody">
+                  <!-- Will be populated dynamically -->
+                </tbody>
+              </table>
+            </div>
+          </div>
+        </section>
+
+        <!-- Supervisor Section -->
+        <section id="supervisors" class="content-section">
+          <div class="supervisors-container">
+            <!-- Supervisor Management Tabs -->
+            <div class="supervisor-tabs">
+              <button class="tab-btn active" data-tab="manage-supervisors">
+                <i class="fas fa-user-tie"></i> Supervisors
+              </button>
+              <button class="tab-btn" data-tab="supervisor-allocation">
+                <i class="fas fa-tasks"></i> Supervisor Allocation
+              </button>
+            </div>
+
+            <!-- Supervisors Tab -->
+            <div class="tab-content active" id="manage-supervisors">
+              <div class="supervisor-list">
+                <div class="list-header">
+                  <div class="list-title">
+                    <h2>Supervisor Directory</h2>
+                    <p>View all registered supervisors</p>
+                  </div>
+                </div>
+
+                <div class="table-container">
+                  <table class="data-table">
+                    <thead>
+                      <tr>
+                        <th>ID</th>
+                        <th>Name</th>
+                        <th>Department</th>
+                        <th>Email</th>
+                        <th>Phone</th>
+                        <th>Availability</th>
+                      </tr>
+                    </thead>
+                    <tbody id="supervisorTableBody">
+                      <!-- Table content will be dynamically inserted here -->
+                    </tbody>
+                  </table>
+                </div>
+
+                <!-- Add this below the table -->
+                <div class="allocation-section">
+                  <button id="allocateSupervisorBtn" class="primary-btn">
+                    <i class="fas fa-user-plus"></i> Allocate Supervisor
+                  </button>
+                </div>
+              </div>
+            </div>
+
+            <!-- Available Supervisors Tab -->
+            <div class="tab-content" id="available-supervisors">
+              <div class="availability-calendar">
+                <div class="calendar-header">
+                  <h2>Supervisor Availability Calendar</h2>
+                  <div class="calendar-controls">
+                    <button class="calendar-nav" id="prevWeek">
+                      <i class="fas fa-chevron-left"></i>
+                    </button>
+                    <span id="currentWeek">Week of May 1, 2024</span>
+                    <button class="calendar-nav" id="nextWeek">
+                      <i class="fas fa-chevron-right"></i>
+                    </button>
+                  </div>
+                </div>
+                <div class="calendar-grid" id="availabilityCalendar">
+                  <!-- Calendar will be dynamically generated -->
+                </div>
+              </div>
+            </div>
+
+            <!-- Supervisor Allocation Tab -->
+            <div class="tab-content" id="supervisor-allocation">
+              <div class="allocation-list">
+                <div class="list-header">
+                  <div class="list-title">
+                    <h2>Supervisor Allocations</h2>
+                    <p>View all supervisor-classroom allocations</p>
+                  </div>
+                </div>
+                <div class="list-actions">
+                  <button id="resetSupervisorAllocationsBtn" class="danger-btn">
+                    <i class="fas fa-trash"></i> Reset All Allocations
+                  </button>
+                </div>
+
+                <div class="table-container">
+                  <table class="allocation-table">
+                    <thead>
+                      <tr>
+                        <th>Classroom</th>
+                        <th>Supervisor</th>
+                        <th>Department</th>
+                        <th>Exam Date</th>
+                        <th>Time</th>
+                        <th>Paper</th>
+                      </tr>
+                    </thead>
+                    <tbody id="supervisorAllocationTableBody">
+                      <!-- Table content will be dynamically populated -->
+                    </tbody>
+                  </table>
+                </div>
+              </div>
+            </div>
+          </div>
+        </section>
+
+        <!-- Timetable Section -->
+        <section id="timetable" class="content-section">
+          <div class="timetable-container">
+            <div class="section-header">
+              <h2><i class="fas fa-calendar-alt"></i> Examination Timetable</h2>
+              <p>Winter 2024 Examination Schedule</p>
+            </div>
+
+            <div class="timetable-filters">
+              <div class="filter-group">
+                <select id="timetableBranch" class="form-select">
+                  <option value="">All Branches</option>
+                  <option value="Computer Science">Computer Science (CS)</option>
+                  <option value="Information Technology">Information Technology (IT)</option>
+                  <option value="AIML">Artificial Intelligence & ML (AIML)</option>
+                  <option value="DS">Data Science (DS)</option>
+                </select>
+
+                <select id="timetableSemester" class="form-select">
+                  <option value="5">Semester 5</option>
+                  <option value="6">Semester 6</option>
+                </select>
+              </div>
+            </div>
+
+      
+            <!-- Computer Science -->
+            <div class="branch-section">
+              <h3 class="branch-title">Computer Science Engineering (CSE)</h3>
+              
+              <!-- Semester 5 -->
+              <div class="semester-section">
+                <h4 class="semester-subtitle">Semester 5</h4>
+                <table>
+                  <thead>
+                    <tr>
+                      <th>Date</th>
+                      <th>Day</th>
+                      <th>Examination Details</th>
+                      <th>Time</th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    <tr>
+                      <td>Jan 12, 2025</td>
+                      <td>Sunday</td>
+                      <td>
+                        <div class="exam-slot">
+                          <div class="subject-code">CSC501</div>
+                          <div class="subject-name">Theoretical Computer Science</div>
+                        </div>
+                      </td>
+                      <td class="exam-time">
+                        <div class="time-container">
+                          <div class="time-badge">
+                            <i class="fas fa-clock"></i>
+                            <span class="time-text">10:30 AM - 1:30 PM</span>
+                          </div>
+                          <div class="duration-badge">
+                            <i class="fas fa-hourglass-half"></i>
+                            <span>3 hours</span>
+                          </div>
+                        </div>
+                      </td>
+                    </tr>
+                    <tr>
+                      <td>Jan 14, 2025</td>
+                      <td>Tuesday</td>
+                      <td>
+                        <div class="exam-slot">
+                          <div class="subject-code">CSC502</div>
+                          <div class="subject-name">Software Engineering</div>
+                        </div>
+                      </td>
+                      <td class="exam-time">
+                        <div class="time-container">
+                          <div class="time-badge">
+                            <i class="fas fa-clock"></i>
+                            <span class="time-text">10:30 AM - 1:30 PM</span>
+                          </div>
+                          <div class="duration-badge">
+                            <i class="fas fa-hourglass-half"></i>
+                            <span>3 hours</span>
+                          </div>
+                        </div>
+                      </td>
+                    </tr>
+                    <tr>
+                      <td>Jan 16, 2025</td>
+                      <td>Thursday</td>
+                      <td>
+                        <div class="exam-slot">
+                          <div class="subject-code">CSC503</div>
+                          <div class="subject-name">Computer Graphics & Virtual Reality</div>
+                        </div>
+                      </td>
+                      <td class="exam-time">
+                        <div class="time-container">
+                          <div class="time-badge">
+                            <i class="fas fa-clock"></i>
+                            <span class="time-text">10:30 AM - 1:30 PM</span>
+                          </div>
+                          <div class="duration-badge">
+                            <i class="fas fa-hourglass-half"></i>
+                            <span>3 hours</span>
+                          </div>
+                        </div>
+                      </td>
+                    </tr>
+                    <tr>
+                      <td>Jan 18, 2025</td>
+                      <td>Saturday</td>
+                      <td>
+                        <div class="exam-slot">
+                          <div class="subject-code">CSC504</div>
+                          <div class="subject-name">Data Warehousing & Mining</div>
+                        </div>
+                      </td>
+                      <td class="exam-time">
+                        <div class="time-container">
+                          <div class="time-badge">
+                            <i class="fas fa-clock"></i>
+                            <span class="time-text">10:30 AM - 1:30 PM</span>
+                          </div>
+                          <div class="duration-badge">
+                            <i class="fas fa-hourglass-half"></i>
+                            <span>3 hours</span>
+                          </div>
+                        </div>
+                      </td>
+                    </tr>
+                    <tr>
+                      <td>Jan 20, 2025</td>
+                      <td>Monday</td>
+                      <td>
+                        <div class="exam-slot">
+                          <div class="subject-code">CSC505</div>
+                          <div class="subject-name">Professional Communication & Ethics - II</div>
+                        </div>
+                      </td>
+                      <td class="exam-time">
+                        <div class="time-container">
+                          <div class="time-badge">
+                            <i class="fas fa-clock"></i>
+                            <span class="time-text">10:30 AM - 1:30 PM</span>
+                          </div>
+                          <div class="duration-badge">
+                            <i class="fas fa-hourglass-half"></i>
+                            <span>3 hours</span>
+                          </div>
+                        </div>
+                      </td>
+                    </tr>
+                  </tbody>
+                </table>
+              </div>
+
+              <!-- Semester 6 -->
+              <div class="semester-section">
+                <h4 class="semester-subtitle">Semester 6</h4>
+                <table>
+                  <thead>
+                    <tr>
+                      <th>Date</th>
+                      <th>Day</th>
+                      <th>Examination Details</th>
+                      <th>Time</th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    <tr>
+                      <td>Jan 22, 2025</td>
+                      <td>Wednesday</td>
+                      <td>
+                        <div class="exam-slot">
+                          <div class="subject-code">CSC601</div>
+                          <div class="subject-name">System Programming & Compiler Construction</div>
+                        </div>
+                      </td>
+                      <td class="exam-time">
+                        <div class="time-container">
+                          <div class="time-badge">
+                            <i class="fas fa-clock"></i>
+                            <span class="time-text">10:30 AM - 1:30 PM</span>
+                          </div>
+                          <div class="duration-badge">
+                            <i class="fas fa-hourglass-half"></i>
+                            <span>3 hours</span>
+                          </div>
+                        </div>
+                      </td>
+                    </tr>
+                    <tr>
+                      <td>Jan 24, 2025</td>
+                      <td>Friday</td>
+                      <td>
+                        <div class="exam-slot">
+                          <div class="subject-code">CSC602</div>
+                          <div class="subject-name">Cryptography & System Security</div>
+                        </div>
+                      </td>
+                      <td class="exam-time">
+                        <div class="time-container">
+                          <div class="time-badge">
+                            <i class="fas fa-clock"></i>
+                            <span class="time-text">10:30 AM - 1:30 PM</span>
+                          </div>
+                          <div class="duration-badge">
+                            <i class="fas fa-hourglass-half"></i>
+                            <span>3 hours</span>
+                          </div>
+                        </div>
+                      </td>
+                    </tr>
+                    <tr>
+                      <td>Jan 26, 2025</td>
+                      <td>Sunday</td>
+                      <td>
+                        <div class="exam-slot">
+                          <div class="subject-code">CSC603</div>
+                          <div class="subject-name">Mobile Computing</div>
+                        </div>
+                      </td>
+                      <td class="exam-time">
+                        <div class="time-container">
+                          <div class="time-badge">
+                            <i class="fas fa-clock"></i>
+                            <span class="time-text">10:30 AM - 1:30 PM</span>
+                          </div>
+                          <div class="duration-badge">
+                            <i class="fas fa-hourglass-half"></i>
+                            <span>3 hours</span>
+                          </div>
+                        </div>
+                      </td>
+                    </tr>
+                    <tr>
+                      <td>Jan 28, 2025</td>
+                      <td>Tuesday</td>
+                      <td>
+                        <div class="exam-slot">
+                          <div class="subject-code">CSC604</div>
+                          <div class="subject-name">Artificial Intelligence</div>
+                        </div>
+                      </td>
+                      <td class="exam-time">
+                        <div class="time-container">
+                          <div class="time-badge">
+                            <i class="fas fa-clock"></i>
+                            <span class="time-text">10:30 AM - 1:30 PM</span>
+                          </div>
+                          <div class="duration-badge">
+                            <i class="fas fa-hourglass-half"></i>
+                            <span>3 hours</span>
+                          </div>
+                        </div>
+                      </td>
+                    </tr>
+                    <tr>
+                      <td>Jan 30, 2025</td>
+                      <td>Thursday</td>
+                      <td>
+                        <div class="exam-slot">
+                          <div class="subject-code">CSC605</div>
+                          <div class="subject-name">Internet Programming</div>
+                        </div>
+                      </td>
+                      <td class="exam-time">
+                        <div class="time-container">
+                          <div class="time-badge">
+                            <i class="fas fa-clock"></i>
+                            <span class="time-text">10:30 AM - 1:30 PM</span>
+                          </div>
+                          <div class="duration-badge">
+                            <i class="fas fa-hourglass-half"></i>
+                            <span>3 hours</span>
+                          </div>
+                        </div>
+                      </td>
+                    </tr>
+                  </tbody>
+                </table>
+              </div>
+            </div>
+
+            <!-- Information Technology -->
+            <div class="branch-section">
+              <h3 class="branch-title">Information Technology (IT)</h3>
+              
+
+              <!-- Semester 5 -->
+              <div class="semester-section">
+                <h4 class="semester-subtitle">Semester 5</h4>
+                <table>
+                  <thead>
+                    <tr>
+                      <th>Date</th>
+                      <th>Day</th>
+                      <th>Examination Details</th>
+                      <th>Time</th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    <tr>
+                      <td>Feb 1, 2025</td>
+                      <td>Saturday</td>
+                      <td>
+                        <div class="exam-slot">
+                          <div class="subject-code">ITC501</div>
+                          <div class="subject-name">Internet Programming</div>
+                        </div>
+                      </td>
+                      <td class="exam-time">
+                        <div class="time-container">
+                          <div class="time-badge">
+                            <i class="fas fa-clock"></i>
+                            <span class="time-text">10:30 AM - 1:30 PM</span>
+                          </div>
+                          <div class="duration-badge">
+                            <i class="fas fa-hourglass-half"></i>
+                            <span>3 hours</span>
+                          </div>
+                        </div>
+                      </td>
+                    </tr>
+                    <tr>
+                      <td>Feb 3, 2025</td>
+                      <td>Monday</td>
+                      <td>
+                        <div class="exam-slot">
+                          <div class="subject-code">ITC502</div>
+                          <div class="subject-name">Advanced Database Management Systems</div>
+                        </div>
+                      </td>
+                      <td class="exam-time">
+                        <div class="time-container">
+                          <div class="time-badge">
+                            <i class="fas fa-clock"></i>
+                            <span class="time-text">10:30 AM - 1:30 PM</span>
+                          </div>
+                          <div class="duration-badge">
+                            <i class="fas fa-hourglass-half"></i>
+                            <span>3 hours</span>
+                          </div>
+                        </div>
+                      </td>
+                    </tr>
+                    <tr>
+                      <td>Feb 5, 2025</td>
+                      <td>Wednesday</td>
+                      <td>
+                        <div class="exam-slot">
+                          <div class="subject-code">ITC503</div>
+                          <div class="subject-name">Cryptography & Network Security</div>
+                        </div>
+                      </td>
+                      <td class="exam-time">
+                        <div class="time-container">
+                          <div class="time-badge">
+                            <i class="fas fa-clock"></i>
+                            <span class="time-text">10:30 AM - 1:30 PM</span>
+                          </div>
+                          <div class="duration-badge">
+                            <i class="fas fa-hourglass-half"></i>
+                            <span>3 hours</span>
+                          </div>
+                        </div>
+                      </td>
+                    </tr>
+                    <tr>
+                      <td>Feb 7, 2025</td>
+                      <td>Friday</td>
+                      <td>
+                        <div class="exam-slot">
+                          <div class="subject-code">ITC504</div>
+                          <div class="subject-name">Microcontroller & Embedded Programming</div>
+                        </div>
+                      </td>
+                      <td class="exam-time">
+                        <div class="time-container">
+                          <div class="time-badge">
+                            <i class="fas fa-clock"></i>
+                            <span class="time-text">10:30 AM - 1:30 PM</span>
+                          </div>
+                          <div class="duration-badge">
+                            <i class="fas fa-hourglass-half"></i>
+                            <span>3 hours</span>
+                          </div>
+                        </div>
+                      </td>
+                    </tr>
+                    <tr>
+                      <td>Feb 9, 2025</td>
+                      <td>Sunday</td>
+                      <td>
+                        <div class="exam-slot">
+                          <div class="subject-code">ITC505</div>
+                          <div class="subject-name">Business Communication & Ethics</div>
+                        </div>
+                      </td>
+                      <td class="exam-time">
+                        <div class="time-container">
+                          <div class="time-badge">
+                            <i class="fas fa-clock"></i>
+                            <span class="time-text">10:30 AM - 1:30 PM</span>
+                          </div>
+                          <div class="duration-badge">
+                            <i class="fas fa-hourglass-half"></i>
+                            <span>3 hours</span>
+                          </div>
+                        </div>
+                      </td>
+                    </tr>
+                  </tbody>
+                </table>
+              </div>
+
+              <!-- Semester 6 -->
+              <div class="semester-section">
+                <h4 class="semester-subtitle">Semester 6</h4>
+                <table>
+                  <thead>
+                    <tr>
+                      <th>Date</th>
+                      <th>Day</th>
+                      <th>Examination Details</th>
+                      <th>Time</th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    <tr>
+                      <td>Feb 11, 2025</td>
+                      <td>Tuesday</td>
+                      <td>
+                        <div class="exam-slot">
+                          <div class="subject-code">ITC601</div>
+                          <div class="subject-name">Software Project Management</div>
+                        </div>
+                      </td>
+                      <td class="exam-time">
+                        <div class="time-container">
+                          <div class="time-badge">
+                            <i class="fas fa-clock"></i>
+                            <span class="time-text">10:30 AM - 1:30 PM</span>
+                          </div>
+                          <div class="duration-badge">
+                            <i class="fas fa-hourglass-half"></i>
+                            <span>3 hours</span>
+                          </div>
+                        </div>
+                      </td>
+                    </tr>
+                    <tr>
+                      <td>Feb 13, 2025</td>
+                      <td>Thursday</td>
+                      <td>
+                        <div class="exam-slot">
+                          <div class="subject-code">ITC602</div>
+                          <div class="subject-name">Cloud Computing & Services</div>
+                        </div>
+                      </td>
+                      <td class="exam-time">
+                        <div class="time-container">
+                          <div class="time-badge">
+                            <i class="fas fa-clock"></i>
+                            <span class="time-text">10:30 AM - 1:30 PM</span>
+                          </div>
+                          <div class="duration-badge">
+                            <i class="fas fa-hourglass-half"></i>
+                            <span>3 hours</span>
+                          </div>
+                        </div>
+                      </td>
+                    </tr>
+                    <tr>
+                      <td>Feb 15, 2025</td>
+                      <td>Saturday</td>
+                      <td>
+                        <div class="exam-slot">
+                          <div class="subject-code">ITC603</div>
+                          <div class="subject-name">Wireless Networks</div>
+                        </div>
+                      </td>
+                      <td class="exam-time">
+                        <div class="time-container">
+                          <div class="time-badge">
+                            <i class="fas fa-clock"></i>
+                            <span class="time-text">10:30 AM - 1:30 PM</span>
+                          </div>
+                          <div class="duration-badge">
+                            <i class="fas fa-hourglass-half"></i>
+                            <span>3 hours</span>
+                          </div>
+                        </div>
+                      </td>
+                    </tr>
+                    <tr>
+                      <td>Feb 17, 2025</td>
+                      <td>Monday</td>
+                      <td>
+                        <div class="exam-slot">
+                          <div class="subject-code">ITC604</div>
+                          <div class="subject-name">Data Mining & Business Intelligence</div>
+                        </div>
+                      </td>
+                      <td class="exam-time">
+                        <div class="time-container">
+                          <div class="time-badge">
+                            <i class="fas fa-clock"></i>
+                            <span class="time-text">10:30 AM - 1:30 PM</span>
+                          </div>
+                          <div class="duration-badge">
+                            <i class="fas fa-hourglass-half"></i>
+                            <span>3 hours</span>
+                          </div>
+                        </div>
+                      </td>
+                    </tr>
+                    <tr>
+                      <td>Feb 19, 2025</td>
+                      <td>Wednesday</td>
+                      <td>
+                        <div class="exam-slot">
+                          <div class="subject-code">ITC605</div>
+                          <div class="subject-name">Enterprise Resource Planning</div>
+                        </div>
+                      </td>
+                      <td class="exam-time">
+                        <div class="time-container">
+                          <div class="time-badge">
+                            <i class="fas fa-clock"></i>
+                            <span class="time-text">10:30 AM - 1:30 PM</span>
+                          </div>
+                          <div class="duration-badge">
+                            <i class="fas fa-hourglass-half"></i>
+                            <span>3 hours</span>
+                          </div>
+                        </div>
+                      </td>
+                    </tr>
+                  </tbody>
+                </table>
+              </div>
+            </div>
+
+            <!-- AIML -->
+            <div class="branch-section">
+              <h3 class="branch-title">Artificial Intelligence and Machine Learning (AIML)</h3>
+              
+              <!-- Semester 5 -->
+              <div class="semester-section">
+                <h4 class="semester-subtitle">Semester 5</h4>
+                <table>
+                  <thead>
+                    <tr>
+                      <th>Date</th>
+                      <th>Day</th>
+                      <th>Examination Details</th>
+                      <th>Time</th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    <tr>
+                      <td>Feb 21, 2025</td>
+                      <td>Friday</td>
+                      <td>
+                        <div class="exam-slot">
+                          <div class="subject-code">AIML501</div>
+                          <div class="subject-name">Machine Learning Algorithms</div>
+                        </div>
+                      </td>
+                      <td class="exam-time">
+                        <div class="time-container">
+                          <div class="time-badge">
+                            <i class="fas fa-clock"></i>
+                            <span class="time-text">10:30 AM - 1:30 PM</span>
+                          </div>
+                          <div class="duration-badge">
+                            <i class="fas fa-hourglass-half"></i>
+                            <span>3 hours</span>
+                          </div>
+                        </div>
+                      </td>
+                    </tr>
+                    <tr>
+                      <td>Feb 23, 2025</td>
+                      <td>Sunday</td>
+                      <td>
+                        <div class="exam-slot">
+                          <div class="subject-code">AIML502</div>
+                          <div class="subject-name">Deep Learning Fundamentals</div>
+                        </div>
+                      </td>
+                      <td class="exam-time">
+                        <div class="time-container">
+                          <div class="time-badge">
+                            <i class="fas fa-clock"></i>
+                            <span class="time-text">10:30 AM - 1:30 PM</span>
+                          </div>
+                          <div class="duration-badge">
+                            <i class="fas fa-hourglass-half"></i>
+                            <span>3 hours</span>
+                          </div>
+                        </div>
+                      </td>
+                    </tr>
+                    <tr>
+                      <td>Feb 25, 2025</td>
+                      <td>Tuesday</td>
+                      <td>
+                        <div class="exam-slot">
+                          <div class="subject-code">AIML503</div>
+                          <div class="subject-name">Big Data Analytics</div>
+                        </div>
+                      </td>
+                      <td class="exam-time">
+                        <div class="time-container">
+                          <div class="time-badge">
+                            <i class="fas fa-clock"></i>
+                            <span class="time-text">10:30 AM - 1:30 PM</span>
+                          </div>
+                          <div class="duration-badge">
+                            <i class="fas fa-hourglass-half"></i>
+                            <span>3 hours</span>
+                          </div>
+                        </div>
+                      </td>
+                    </tr>
+                    <tr>
+                      <td>Feb 27, 2025</td>
+                      <td>Thursday</td>
+                      <td>
+                        <div class="exam-slot">
+                          <div class="subject-code">AIML504</div>
+                          <div class="subject-name">Neural Networks</div>
+                        </div>
+                      </td>
+                      <td class="exam-time">
+                        <div class="time-container">
+                          <div class="time-badge">
+                            <i class="fas fa-clock"></i>
+                            <span class="time-text">10:30 AM - 1:30 PM</span>
+                          </div>
+                          <div class="duration-badge">
+                            <i class="fas fa-hourglass-half"></i>
+                            <span>3 hours</span>
+                          </div>
+                        </div>
+                      </td>
+                    </tr>
+                    <tr>
+                      <td>Mar 1, 2025</td>
+                      <td>Saturday</td>
+                      <td>
+                        <div class="exam-slot">
+                          <div class="subject-code">AIML505</div>
+                          <div class="subject-name">Professional Communication & Ethics</div>
+                        </div>
+                      </td>
+                      <td class="exam-time">
+                        <div class="time-container">
+                          <div class="time-badge">
+                            <i class="fas fa-clock"></i>
+                            <span class="time-text">10:30 AM - 1:30 PM</span>
+                          </div>
+                          <div class="duration-badge">
+                            <i class="fas fa-hourglass-half"></i>
+                            <span>3 hours</span>
+                          </div>
+                        </div>
+                      </td>
+                    </tr>
+                  </tbody>
+                </table>
+              </div>
+
+              <!-- Semester 6 -->
+              <div class="semester-section">
+                <h4 class="semester-subtitle">Semester 6</h4>
+                <table>
+                  <thead>
+                    <tr>
+                      <th>Date</th>
+                      <th>Day</th>
+                      <th>Examination Details</th>
+                      <th>Time</th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    <tr>
+                      <td>Mar 3, 2025</td>
+                      <td>Monday</td>
+                      <td>
+                        <div class="exam-slot">
+                          <div class="subject-code">AIML601</div>
+                          <div class="subject-name">Natural Language Processing</div>
+                        </div>
+                      </td>
+                      <td class="exam-time">
+                        <div class="time-container">
+                          <div class="time-badge">
+                            <i class="fas fa-clock"></i>
+                            <span class="time-text">10:30 AM - 1:30 PM</span>
+                          </div>
+                          <div class="duration-badge">
+                            <i class="fas fa-hourglass-half"></i>
+                            <span>3 hours</span>
+                          </div>
+                        </div>
+                      </td>
+                    </tr>
+                    <tr>
+                      <td>Mar 5, 2025</td>
+                      <td>Wednesday</td>
+                      <td>
+                        <div class="exam-slot">
+                          <div class="subject-code">AIML602</div>
+                          <div class="subject-name">Computer Vision</div>
+                        </div>
+                      </td>
+                      <td class="exam-time">
+                        <div class="time-container">
+                          <div class="time-badge">
+                            <i class="fas fa-clock"></i>
+                            <span class="time-text">10:30 AM - 1:30 PM</span>
+                          </div>
+                          <div class="duration-badge">
+                            <i class="fas fa-hourglass-half"></i>
+                            <span>3 hours</span>
+                          </div>
+                        </div>
+                      </td>
+                    </tr>
+                    <tr>
+                      <td>Mar 7, 2025</td>
+                      <td>Friday</td>
+                      <td>
+                        <div class="exam-slot">
+                          <div class="subject-code">AIML603</div>
+                          <div class="subject-name">Robotics & AI</div>
+                        </div>
+                      </td>
+                      <td class="exam-time">
+                        <div class="time-container">
+                          <div class="time-badge">
+                            <i class="fas fa-clock"></i>
+                            <span class="time-text">10:30 AM - 1:30 PM</span>
+                          </div>
+                          <div class="duration-badge">
+                            <i class="fas fa-hourglass-half"></i>
+                            <span>3 hours</span>
+                          </div>
+                        </div>
+                      </td>
+                    </tr>
+                    <tr>
+                      <td>Mar 9, 2025</td>
+                      <td>Sunday</td>
+                      <td>
+                        <div class="exam-slot">
+                          <div class="subject-code">AIML604</div>
+                          <div class="subject-name">Cloud Computing & MLOps</div>
+                        </div>
+                      </td>
+                      <td class="exam-time">
+                        <div class="time-container">
+                          <div class="time-badge">
+                            <i class="fas fa-clock"></i>
+                            <span class="time-text">10:30 AM - 1:30 PM</span>
+                          </div>
+                          <div class="duration-badge">
+                            <i class="fas fa-hourglass-half"></i>
+                            <span>3 hours</span>
+                          </div>
+                        </div>
+                      </td>
+                    </tr>
+                    <tr>
+                      <td>Mar 11, 2025</td>
+                      <td>Tuesday</td>
+                      <td>
+                        <div class="exam-slot">
+                          <div class="subject-code">AIML605</div>
+                          <div class="subject-name">AI Ethics & Governance</div>
+                        </div>
+                      </td>
+                      <td class="exam-time">
+                        <div class="time-container">
+                          <div class="time-badge">
+                            <i class="fas fa-clock"></i>
+                            <span class="time-text">10:30 AM - 1:30 PM</span>
+                          </div>
+                          <div class="duration-badge">
+                            <i class="fas fa-hourglass-half"></i>
+                            <span>3 hours</span>
+                          </div>
+                        </div>
+                      </td>
+                    </tr>
+                    
+                  </tbody>
+                </table>
+              </div>
+            </div>
+
+            <!-- Data Science -->
+            <div class="branch-section">
+              <h3 class="branch-title">Data Science (DS)</h3>
+              
+              <!-- Semester 5 -->
+              <div class="semester-section">
+                <h4 class="semester-subtitle">Semester 5</h4>
+                <table>
+                  <thead>
+                    <tr>
+                      <th>Date</th>
+                      <th>Day</th>
+                      <th>Examination Details</th>
+                      <th>Time</th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    <tr>
+                      <td>Mar 13, 2025</td>
+                      <td>Thursday</td>
+                      <td>
+                        <div class="exam-slot">
+                          <div class="subject-code">DS501</div>
+                          <div class="subject-name">Advanced Machine Learning</div>
+                        </div>
+                      </td>
+                      <td class="exam-time">
+                        <div class="time-container">
+                          <div class="time-badge">
+                            <i class="fas fa-clock"></i>
+                            <span class="time-text">10:30 AM - 1:30 PM</span>
+                          </div>
+                          <div class="duration-badge">
+                            <i class="fas fa-hourglass-half"></i>
+                            <span>3 hours</span>
+                          </div>
+                        </div>
+                      </td>
+                    </tr>
+                    <tr>
+                      <td>Mar 15, 2025</td>
+                      <td>Saturday</td>
+                      <td>
+                        <div class="exam-slot">
+                          <div class="subject-code">DS502</div>
+                          <div class="subject-name">Big Data Technologies</div>
+                        </div>
+                      </td>
+                      <td class="exam-time">
+                        <div class="time-container">
+                          <div class="time-badge">
+                            <i class="fas fa-clock"></i>
+                            <span class="time-text">10:30 AM - 1:30 PM</span>
+                          </div>
+                          <div class="duration-badge">
+                            <i class="fas fa-hourglass-half"></i>
+                            <span>3 hours</span>
+                          </div>
+                        </div>
+                      </td>
+                    </tr>
+                    <tr>
+                      <td>Mar 17, 2025</td>
+                      <td>Monday</td>
+                      <td>
+                        <div class="exam-slot">
+                          <div class="subject-code">DS503</div>
+                          <div class="subject-name">Data Mining Techniques</div>
+                        </div>
+                      </td>
+                      <td class="exam-time">
+                        <div class="time-container">
+                          <div class="time-badge">
+                            <i class="fas fa-clock"></i>
+                            <span class="time-text">10:30 AM - 1:30 PM</span>
+                          </div>
+                          <div class="duration-badge">
+                            <i class="fas fa-hourglass-half"></i>
+                            <span>3 hours</span>
+                          </div>
+                        </div>
+                      </td>
+                    </tr>
+                    <tr>
+                      <td>Mar 19, 2025</td>
+                      <td>Wednesday</td>
+                      <td>
+                        <div class="exam-slot">
+                          <div class="subject-code">DS504</div>
+                          <div class="subject-name">Predictive Analytics</div>
+                        </div>
+                      </td>
+                      <td class="exam-time">
+                        <div class="time-container">
+                          <div class="time-badge">
+                            <i class="fas fa-clock"></i>
+                            <span class="time-text">10:30 AM - 1:30 PM</span>
+                          </div>
+                          <div class="duration-badge">
+                            <i class="fas fa-hourglass-half"></i>
+                            <span>3 hours</span>
+                          </div>
+                        </div>
+                      </td>
+                    </tr>
+                    <tr>
+                      <td>Mar 21, 2025</td>
+                      <td>Friday</td>
+                      <td>
+                        <div class="exam-slot">
+                          <div class="subject-code">DS505</div>
+                          <div class="subject-name">Professional Communication & Ethics</div>
+                        </div>
+                      </td>
+                      <td class="exam-time">
+                        <div class="time-container">
+                          <div class="time-badge">
+                            <i class="fas fa-clock"></i>
+                            <span class="time-text">10:30 AM - 1:30 PM</span>
+                          </div>
+                          <div class="duration-badge">
+                            <i class="fas fa-hourglass-half"></i>
+                            <span>3 hours</span>
+                          </div>
+                        </div>
+                      </td>
+                    </tr>
+                  </tbody>
+                </table>
+              </div>
+
+              <!-- Semester 6 -->
+              <div class="semester-section">
+                <h4 class="semester-subtitle">Semester 6</h4>
+                <table>
+                  <thead>
+                    <tr>
+                      <th>Date</th>
+                      <th>Day</th>
+                      <th>Examination Details</th>
+                      <th>Time</th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    <tr>
+                      <td>Mar 23, 2025</td>
+                      <td>Sunday</td>
+                      <td>
+                        <div class="exam-slot">
+                          <div class="subject-code">DS601</div>
+                          <div class="subject-name">Natural Language Processing</div>
+                        </div>
+                      </td>
+                      <td class="exam-time">
+                        <div class="time-container">
+                          <div class="time-badge">
+                            <i class="fas fa-clock"></i>
+                            <span class="time-text">10:30 AM - 1:30 PM</span>
+                          </div>
+                          <div class="duration-badge">
+                            <i class="fas fa-hourglass-half"></i>
+                            <span>3 hours</span>
+                          </div>
+                        </div>
+                      </td>
+                    </tr>
+                    <tr>
+                      <td>Mar 25, 2025</td>
+                      <td>Tuesday</td>
+                      <td>
+                        <div class="exam-slot">
+                          <div class="subject-code">DS602</div>
+                          <div class="subject-name">Time Series Analysis</div>
+                        </div>
+                      </td>
+                      <td class="exam-time">
+                        <div class="time-container">
+                          <div class="time-badge">
+                            <i class="fas fa-clock"></i>
+                            <span class="time-text">10:30 AM - 1:30 PM</span>
+                          </div>
+                          <div class="duration-badge">
+                            <i class="fas fa-hourglass-half"></i>
+                            <span>3 hours</span>
+                          </div>
+                        </div>
+                      </td>
+                    </tr>
+                    <tr>
+                      <td>Mar 27, 2025</td>
+                      <td>Thursday</td>
+                      <td>
+                        <div class="exam-slot">
+                          <div class="subject-code">DS603</div>
+                          <div class="subject-name">Computer Vision</div>
+                        </div>
+                      </td>
+                      <td class="exam-time">
+                        <div class="time-container">
+                          <div class="time-badge">
+                            <i class="fas fa-clock"></i>
+                            <span class="time-text">10:30 AM - 1:30 PM</span>
+                          </div>
+                          <div class="duration-badge">
+                            <i class="fas fa-hourglass-half"></i>
+                            <span>3 hours</span>
+                          </div>
+                        </div>
+                      </td>
+                    </tr>
+                    <tr>
+                      <td>Mar 29, 2025</td>
+                      <td>Saturday</td>
+                      <td>
+                        <div class="exam-slot">
+                          <div class="subject-code">DS604</div>
+                          <div class="subject-name">Data Engineering</div>
+                        </div>
+                      </td>
+                      <td class="exam-time">
+                        <div class="time-container">
+                          <div class="time-badge">
+                            <i class="fas fa-clock"></i>
+                            <span class="time-text">10:30 AM - 1:30 PM</span>
+                          </div>
+                          <div class="duration-badge">
+                            <i class="fas fa-hourglass-half"></i>
+                            <span>3 hours</span>
+                          </div>
+                        </div>
+                      </td>
+                    </tr>
+                    <tr>
+                      <td>Mar 31, 2025</td>
+                      <td>Monday</td>
+                      <td>
+                        <div class="exam-slot">
+                          <div class="subject-code">DS605</div>
+                          <div class="subject-name">Business Analytics</div>
+                        </div>
+                      </td>
+                      <td class="exam-time">
+                        <div class="time-container">
+                          <div class="time-badge">
+                            <i class="fas fa-clock"></i>
+                            <span class="time-text">10:30 AM - 1:30 PM</span>
+                          </div>
+                          <div class="duration-badge">
+                            <i class="fas fa-hourglass-half"></i>
+                            <span>3 hours</span>
+                          </div>
+                        </div>
+                      </td>
+                    </tr>
+                  </tbody>
+                </table>
+              </div>
+            </div>
+          </div>
+        </section>
+
+        <!-- Results Section -->
+        <section id="results" class="content-section">
+          <div class="results-container">
+            <div class="section-header">
+              <h2>Manage Results</h2>
+              <p>View and manage student grade cards generated by faculty</p>
+            </div>
+
+            <!-- Enhanced Filters with Icons -->
+            <div class="results-filters">
+              <div class="filter-group">
+                <div class="filter-item">
+                  <i class="fas fa-code-branch"></i>
+                  <select id="filterResultBranch" class="form-select">
+                    <option value="">All Branches</option>
+                    <option value="Computer Science">Computer Science</option>
+                    <option value="Information Technology">Information Technology</option>
+                    <option value="Electronics">Electronics</option>
+                    <option value="Mechanical">Mechanical</option>
+                    <option value="Civil">Civil</option>
+                    <option value="Electrical">Electrical</option>
+                    <option value="AIML">AIML</option>
+                    <option value="DS">DS</option>
+                  </select>
+                </div>
+                <div class="filter-item">
+                  <i class="fas fa-layer-group"></i>
+                  <select id="filterResultSemester" class="form-select">
+                    <option value="">All Semesters</option>
+                    <option value="1">Semester 1</option>
+                    <option value="2">Semester 2</option>
+                    <option value="3">Semester 3</option>
+                    <option value="4">Semester 4</option>
+                    <option value="5">Semester 5</option>
+                    <option value="6">Semester 6</option>
+                    <option value="7">Semester 7</option>
+                    <option value="8">Semester 8</option>
+                  </select>
+                </div>
+                <div class="filter-item">
+                  <i class="fas fa-calendar-alt"></i>
+                  <select id="filterResultYear" class="form-select">
+                    <option value="">All Years</option>
+                    <option value="2023">2023</option>
+                    <option value="2024">2024</option>
+                    <option value="2025">2025</option>
+                  </select>
+                </div>
+                <div class="filter-item search-item">
+                  <i class="fas fa-search"></i>
+                  <input type="text" id="searchResult" class="form-input" placeholder="Search by Roll Number or Name">
+                </div>
+              </div>
+            </div>
+
+            <!-- Enhanced Stats Cards -->
+            <div class="results-stats">
+              <div class="stat-card result-stat-card">
+                <div class="stat-icon">
+                  <i class="fas fa-file-alt"></i>
+                </div>
+                <div class="stat-info">
+                  <h3>Total Grade Cards</h3>
+                  <p id="resultsGradeCardCount">0</p>
+                </div>
+              </div>
+              <div class="stat-card result-stat-card">
+                <div class="stat-icon">
+                  <i class="fas fa-check-circle"></i>
+                </div>
+                <div class="stat-info">
+                  <h3>Pass Percentage</h3>
+                  <p id="passPercentage">0%</p>
+                  <div class="progress-bar">
+                    <div class="progress" id="passProgressBar" style="width: 0%"></div>
+                  </div>
+                </div>
+              </div>
+              <div class="stat-card result-stat-card">
+                <div class="stat-icon">
+                  <i class="fas fa-star"></i>
+                </div>
+                <div class="stat-info">
+                  <h3>Average SGPA</h3>
+                  <p id="averageSGPA">0.00</p>
+                  <div class="progress-bar sgpa-bar">
+                    <div class="progress" id="sgpaProgressBar" style="width: 0%"></div>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <!-- Enhanced Results Table -->
+            <div class="results-table-container">
+              <table class="results-table">
+                <thead>
+                  <tr>
+                    <th>Roll Number</th>
+                    <th>Student Name</th>
+                    <th>Branch</th>
+                    <th>Semester</th>
+                    <th>SGPA</th>
+                    <th>Result</th>
+                    <th>Generated On</th>
+                    <th>Actions</th>
+                  </tr>
+                </thead>
+                <tbody id="resultsTableBody">
+                  <tr>
+                    <td colspan="8" class="no-data">
+                      <i class="fas fa-info-circle"></i>
+                      <p>No grade cards found</p>
+                    </td>
+                  </tr>
+                </tbody>
+              </table>
+            </div>
+
+            <!-- Enhanced Pagination -->
+            <div class="pagination results-pagination">
+              <button id="prevResultPage" class="pagination-btn">
+                <i class="fas fa-chevron-left"></i> Previous
+              </button>
+              <div class="pagination-numbers" id="paginationNumbers">
+                <span class="page-number active">1</span>
+              </div>
+              <span class="pagination-info">
+                Page <span id="currentResultPage">1</span> of <span id="totalResultPages">1</span>
+              </span>
+              <button id="nextResultPage" class="pagination-btn">
+                Next <i class="fas fa-chevron-right"></i>
+              </button>
+            </div>
+
+            <!-- Grade Card Modal -->
+            <div id="gradeCardModal" class="modal">
+              <div class="modal-content grade-card-modal">
+                <div class="modal-header">
+                  <h2>Student Grade Card</h2>
+                  <button class="close-btn" id="closeGradeCardModal">
+                    <i class="fas fa-times"></i>
+                  </button>
+                </div>
+                <div class="modal-body">
+                  <div class="grade-card">
+                    <div class="grade-card-header">
+                      <div class="university-logo">
+                        <i class="fas fa-university"></i>
+                      </div>
+                      <div class="university-details">
+                        <h2>Mumbai University</h2>
+                        <p>Grade Card</p>
+                      </div>
+                    </div>
+
+                    <div class="student-info">
+                      <div class="info-grid">
+                        <div class="info-item">
+                          <span>Name:</span>
+                          <p id="modalStudentName">-</p>
+                        </div>
+                        <div class="info-item">
+                          <span>Roll Number:</span>
+                          <p id="modalRollNumber">-</p>
+                        </div>
+                        <div class="info-item">
+                          <span>Branch:</span>
+                          <p id="modalBranch">-</p>
+                        </div>
+                        <div class="info-item">
+                          <span>Semester:</span>
+                          <p id="modalSemester">-</p>
+                        </div>
+                        <div class="info-item">
+                          <span>Academic Year:</span>
+                          <p id="modalAcademicYear">-</p>
+                        </div>
+                        <div class="info-item">
+                          <span>Generated By:</span>
+                          <p id="modalGeneratedBy">-</p>
+                        </div>
+                      </div>
+                    </div>
+
+                    <div class="marks-table-container">
+                      <table class="grade-table">
+                        <thead>
+                          <tr>
+                            <th>Subject</th>
+                            <th>Semester Exam</th>
+                            <th>Internal</th>
+                            <th>Practical</th>
+                            <th>Term Work</th>
+                            <th>Total</th>
+                            <th>Grade</th>
+                          </tr>
+                        </thead>
+                        <tbody id="modalGradeTableBody">
+                          <!-- Will be populated dynamically -->
+                        </tbody>
+                      </table>
+                    </div>
+
+                    <div class="grade-summary">
+                      <div class="summary-grid">
+                        <div class="summary-item">
+                          <span>SGPA:</span>
+                          <p id="modalSgpa">-</p>
+                        </div>
+                        <div class="summary-item">
+                          <span>Result:</span>
+                          <p id="modalResult">-</p>
+                        </div>
+                      </div>
+                    </div>
+
+                    <div class="grade-card-footer">
+                      <button class="action-btn" id="printGradeCardBtn">
+                        <i class="fas fa-print"></i> Print Grade Card
+                      </button>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </section>
+      </main>
+    </div>
+  </body>
+</html>
